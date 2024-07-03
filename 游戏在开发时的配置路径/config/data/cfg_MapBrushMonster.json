@@ -1,0 +1,20 @@
+[
+    {
+        "KEY_INDEX": "1",
+        "MapBrushId": 1,
+        "MapName": "基础测试用地图",
+        "MapBaseDescribe": "测试用的地图",
+        "BornPoint": [
+            100.0,
+            100.0
+        ],
+        "CameraBaseCfg": [],
+        "CameraCfg": [],
+        "BrushId_List": [
+            1
+        ],
+        "M_AttributeId_List": [],
+        "E_AttributeId_List": [],
+        "Pass_Condition": []
+    }
+]

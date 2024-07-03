@@ -1,0 +1,78 @@
+[
+    {
+        "KEY_INDEX": "1",
+        "Map_Brush_Id": 1,
+        "Brush_Type_Name": "BrushPoint_Name_1",
+        "Brush_Describe": "在某个点进行刷新",
+        "FirstWaveTime": 5.0,
+        "BrushPos": [
+            240.0,
+            200.0
+        ],
+        "WaveList": [
+            1,
+            2
+        ],
+        "Shape_Select": 1,
+        "Polygon": [
+            [
+                0.0,
+                0.0
+            ]
+        ],
+        "Radius": 0
+    },
+    {
+        "KEY_INDEX": "2",
+        "Map_Brush_Id": 2,
+        "Brush_Type_Name": "BrushPoint_Name_2",
+        "Brush_Describe": "在一个矩形区域内刷新",
+        "FirstWaveTime": 5.0,
+        "BrushPos": [
+            0.0,
+            0.0
+        ],
+        "WaveList": [
+            1,
+            2
+        ],
+        "Shape_Select": 2,
+        "Polygon": [
+            [
+                10.0,
+                10.0
+            ],
+            [
+                10.0,
+                -10.0
+            ],
+            [
+                -10.0,
+                -10.0
+            ],
+            [
+                -10.0,
+                10.0
+            ]
+        ],
+        "Radius": 0
+    },
+    {
+        "KEY_INDEX": "3",
+        "Map_Brush_Id": 3,
+        "Brush_Type_Name": "圆形区域刷新",
+        "Brush_Describe": "在一个圆形区域内刷新",
+        "FirstWaveTime": 5.0,
+        "BrushPos": [
+            0,
+            0
+        ],
+        "WaveList": [
+            1,
+            2
+        ],
+        "Shape_Select": 3,
+        "Polygon": [],
+        "Radius": 15.0
+    }
+]
