@@ -10,7 +10,6 @@ import platform
 class FileBrowserApp:
     def __init__(self, root):
         ##self.image_path_list = []  ##需要导出图片数据的列表
-
         self.select_path = ""  ##当前选中的文件或者文件夹路径
         self.error_table_path = ""  ##当前报错表路径
 
@@ -26,10 +25,13 @@ class FileBrowserApp:
         # 创建菜单栏
         menu_bar = tk.Menu(self.root)
         file_menu = tk.Menu(menu_bar, tearoff=0)
-        file_menu.add_command(label="打开")
-        file_menu.add_command(label="保存")
-        menu_bar.add_cascade(label="文件", menu=file_menu)
+        file_menu.add_command(label="刷新所有表的数据类型", command=self.refresh_data_types)
+        menu_bar.add_cascade(label="文件操作", menu=file_menu)
         self.root.config(menu=menu_bar)
+
+    def refresh_data_types(self):
+        # 这个函数将在菜单项被点击时执行
+        DataHandle.RefreshAllData(ConfigData["工具读取的xlsx文件夹路径"])#刷新所有表数据
 
     def create_frames(self):
         # 创建左右两个Frame
@@ -96,6 +98,9 @@ class FileBrowserApp:
 
         self.open_error_btn = tk.Button(button_frame, text="打开报错", command=self.open_error_table)
         self.open_error_btn.pack(side=tk.LEFT, padx=5)
+
+        self.export_class = tk.Button(button_frame, text="导出类", command=self.export_class)
+        self.export_class.pack(side=tk.LEFT, padx=5)
 
         self.button_state("disabled")
 
@@ -185,6 +190,7 @@ class FileBrowserApp:
         path = path[1:]
         return ConfigData["工具读取的xlsx文件夹路径"] + '/'.join(path)
 
+    ##导出配置
     def export_all(self):
         DataHandle.AllXlsxDataHandle(ConfigData["工具读取的xlsx文件夹路径"])
         error_text = Config.read_log()
@@ -199,6 +205,23 @@ class FileBrowserApp:
                 self.err_label.config(text="导出成功！\n但是存在异常！"+error_text)
             else:
                 self.err_label.config(text="导出成功！")
+            self.error_table_path = ""
+
+    ##导出类
+    def export_class(self):
+        DataHandle.AllXlsxDataHandleClass(ConfigData["工具读取的xlsx文件夹路径"])
+        error_text = Config.read_log()
+        #print(error_text)
+        if error_text.find("导出失败") != -1:
+            p1 = error_text.find("导出类失败！配置文件:[")
+            if p1 != -1:
+                self.error_table_path = error_text[p1 + 6:error_text.find("]")]
+            self.err_label.config(text=error_text)
+        else:
+            if error_text.find("导出异常！") != -1:
+                self.err_label.config(text="导出类成功！\n但是数据存在异常！"+error_text)
+            else:
+                self.err_label.config(text="导出类成功！")
             self.error_table_path = ""
 
     def copy_config_develop(self):

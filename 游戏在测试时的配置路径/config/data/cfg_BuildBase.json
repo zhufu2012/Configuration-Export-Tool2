@@ -1,0 +1,28 @@
+[
+    {
+        "KEY_INDEX": "1",
+        "BuildingID": 1,
+        "BuildingName": "城墙",
+        "ObjectId": 1,
+        "DefaultCamp": 1,
+        "BuildingSize": "-2,2|2,2|2,-2|-2,-2",
+        "BuildingRules": [
+            1,
+            3
+        ],
+        "BuildPicture": "./data/config/images/ID_1AB15965F79A463E8987FB77B721B313.png"
+    },
+    {
+        "KEY_INDEX": "2",
+        "BuildingID": 2,
+        "BuildingName": "加固城墙",
+        "ObjectId": 2,
+        "DefaultCamp": 1,
+        "BuildingSize": "-4,4|4,4|4,-4|-4,-4",
+        "BuildingRules": [
+            1,
+            3
+        ],
+        "BuildPicture": "./data/config/images/ID_1197C27D54C74C2D9C021D569C60E38D.png"
+    }
+]

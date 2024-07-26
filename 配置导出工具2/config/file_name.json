@@ -1,6 +1,160 @@
 {
     "cfg_files": [
         {
+            "file_name": "cfg_ConfigCover",
+            "file_path": "./data/config/data/cfg_ConfigCover.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "CoverId": "string",
+                "CoverName": "string",
+                "CoverDescribe": "string",
+                "CoverType": "List<int>",
+                "CoverTableName": "string"
+            }
+        },
+        {
+            "file_name": "cfg_ConfigCall",
+            "file_path": "./data/config/data/cfg_ConfigCall.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "CallId": "string",
+                "ReadTableName": "string",
+                "CallTableName": "string",
+                "CallName": "string",
+                "CallDescribe": "string",
+                "CallCondition1": "List<List<int>>"
+            }
+        },
+        {
+            "file_name": "cfg_GlobalConfigInt",
+            "file_path": "./data/config/data/cfg_GlobalConfigInt.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "Configid": "string",
+                "ConfigName": "string",
+                "ConfigValue": "int"
+            }
+        },
+        {
+            "file_name": "cfg_GlobalConfigStr",
+            "file_path": "./data/config/data/cfg_GlobalConfigStr.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "Configid": "string",
+                "ConfigName": "string",
+                "ConfigValue": "string"
+            }
+        },
+        {
+            "file_name": "cfg_GlobalConfigFloat",
+            "file_path": "./data/config/data/cfg_GlobalConfigFloat.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "Configid": "string",
+                "ConfigName": "string",
+                "ConfigValue": "float"
+            }
+        },
+        {
+            "file_name": "cfg_GlobalConfigList",
+            "file_path": "./data/config/data/cfg_GlobalConfigList.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "Configid": "string",
+                "ConfigName": "string",
+                "ConfigValue": "List<int>"
+            }
+        },
+        {
+            "file_name": "cfg_FunctionTemplate",
+            "file_path": "./data/config/data/cfg_FunctionTemplate.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "TemplateId": "string",
+                "TableName": "string",
+                "TableKey": "string",
+                "TableField": "string",
+                "CodePack": "string",
+                "CodeVariable": "string",
+                "CodeReturn": "string",
+                "VariableType": "string"
+            }
+        },
+        {
+            "file_name": "cfg_CameraBase",
+            "file_path": "./data/config/data/cfg_CameraBase.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "CameraId": "int",
+                "AssemblyIdList": "List<List<int>>",
+                "StartPos": "Vector2",
+                "IsMove": "bool",
+                "MoveSpeed": "float",
+                "StartZoom": "float",
+                "IsZoomIn": "bool",
+                "IsZoomOut": "bool",
+                "MaxZoom": "float",
+                "MinZoom": "float",
+                "ZoomIncrement": "float",
+                "IsEdgeScroll": "bool",
+                "EdgeScrollMargin": "float",
+                "BaseEdgeScrollSpeed": "float",
+                "CursorPoint": "Texture2D",
+                "CursorGrab": "Texture2D"
+            }
+        },
+        {
+            "file_name": "cfg_CameraAssembly",
+            "file_path": "./data/config/data/cfg_CameraAssembly.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "AssemblyId": "int",
+                "Type": "int",
+                "Pparam": "int",
+                "Offset": "Vector2"
+            }
+        },
+        {
+            "file_name": "cfg_SeedType",
+            "file_path": "./data/config/data/cfg_SeedType.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "SeedTypeId": "int",
+                "SeedTypeName": "string",
+                "SeedType": "int",
+                "Seed": "int",
+                "NoiseId": "int"
+            }
+        },
+        {
+            "file_name": "cfg_Noise",
+            "file_path": "./data/config/data/cfg_Noise.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "NoiseId": "int",
+                "NoiseType": "int",
+                "NoiseX": "int",
+                "NoiseY": "int",
+                "Frequency": "float",
+                "Enabled": "bool",
+                "Amplitude": "float",
+                "WarpFractalGain": "float",
+                "WarpFractalType": "int",
+                "WarpFrequency": "float",
+                "WarpFractalOctaves": "int",
+                "WarpType": "int",
+                "FractalType": "int",
+                "FractalGain": "float",
+                "FractalLacunarity": "float",
+                "FractalOctaves": "int",
+                "FractalPingPongStrength": "float",
+                "FractalWeightedStrength": "float",
+                "DistanceFunction": "int",
+                "CellularJitter": "float",
+                "CellularReturnType": "int"
+            }
+        },
+        {
             "file_name": "cfg_MapBrushMonster",
             "file_path": "./data/config/data/cfg_MapBrushMonster.json",
             "key_list": {
@@ -64,8 +218,8 @@
             }
         },
         {
-            "file_name": "cfg_TowerBase",
-            "file_path": "./data/config/data/cfg_TowerBase.json",
+            "file_name": "cfg_TestTowerBase",
+            "file_path": "./data/config/data/cfg_TestTowerBase.json",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Tower_Id": "int",
@@ -83,8 +237,8 @@
             }
         },
         {
-            "file_name": "cfg_TowerAttr",
-            "file_path": "./data/config/data/cfg_TowerAttr.json",
+            "file_name": "cfg_TestTowerAttr",
+            "file_path": "./data/config/data/cfg_TestTowerAttr.json",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Tower_Id": "int",
@@ -103,7 +257,7 @@
                 "Science_Describe": "string",
                 "Malleability": "int",
                 "Intensity": "float",
-                "Intensity2": "UInt64",
+                "Intensity2": "ulong",
                 "Type": "List<List<int>>",
                 "PoaoType": "List<int>",
                 "RGB": "List<short>",
@@ -134,6 +288,292 @@
             }
         },
         {
+            "file_name": "cfg_BulletBase",
+            "file_path": "./data/config/data/cfg_BulletBase.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "BulletId": "int",
+                "BulletName": "string",
+                "ObjectId": "int",
+                "BulletSize": "int",
+                "BulletPng": "Texture2D"
+            }
+        },
+        {
+            "file_name": "cfg_BaseObjectShow",
+            "file_path": "./data/config/data/cfg_BaseObjectShow.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ObjectShow": "int",
+                "ObjectBottomId": "int",
+                "ObjectSideId": "int"
+            }
+        },
+        {
+            "file_name": "cfg_ObjectBottomBar",
+            "file_path": "./data/config/data/cfg_ObjectBottomBar.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "BottomBarId": "int",
+                "BottomBarOffset": "Vector2"
+            }
+        },
+        {
+            "file_name": "cfg_ObjectSideBar",
+            "file_path": "./data/config/data/cfg_ObjectSideBar.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "SideBarId": "int",
+                "SideBarOffset": "Vector2"
+            }
+        },
+        {
+            "file_name": "cfg_BuildBase",
+            "file_path": "./data/config/data/cfg_BuildBase.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "BuildingID": "int",
+                "BuildingName": "string",
+                "ObjectId": "int",
+                "DefaultCamp": "int",
+                "BuildingSize": "string",
+                "BuildingRules": "List<int>",
+                "BuildPicture": "Texture2D"
+            }
+        },
+        {
+            "file_name": "cfg_BuildRule",
+            "file_path": "./data/config/data/cfg_BuildRule.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "BuildingID": "int",
+                "BuildingName": "string",
+                "searchTags": "string",
+                "searchTeam": "string",
+                "searchDistance": "int",
+                "minCount": "int",
+                "maxCount": "int",
+                "blocksPlacement": "int",
+                "cannotPlaceMessage": "int"
+            }
+        },
+        {
+            "file_name": "cfg_TowerBase",
+            "file_path": "./data/config/data/cfg_TowerBase.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "TowerId": "int",
+                "TowerName": "string",
+                "ObjectId": "int",
+                "CampId": "int",
+                "TowerSize": "List<int>",
+                "TowerBasePng": "Texture2D",
+                "TowerWeaponPng": "Texture2D"
+            }
+        },
+        {
+            "file_name": "cfg_AttributeBase",
+            "file_path": "./data/config/data/cfg_AttributeBase.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "AttributeId": "int",
+                "ShowName": "string",
+                "DependencyIdList": "List<int>"
+            }
+        },
+        {
+            "file_name": "cfg_AttributeData",
+            "file_path": "./data/config/data/cfg_AttributeData.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ObjectType": "int",
+                "ObjectId": "int",
+                "AttributeId": "int",
+                "StartValue": "float",
+                "Max": "float",
+                "Min": "float",
+                "Regen": "float",
+                "RegenFps": "float",
+                "AttrEventIdList": "List<List<int>>"
+            }
+        },
+        {
+            "file_name": "cfg_AttrCalculate",
+            "file_path": "./data/config/data/cfg_AttrCalculate.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "CalculateId": "int",
+                "CalculateType": "int",
+                "Priority": "List<int>",
+                "Relation": "string"
+            }
+        },
+        {
+            "file_name": "cfg_AttrDependency",
+            "file_path": "./data/config/data/cfg_AttrDependency.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "DependencyId": "int",
+                "Target": "int",
+                "Relation": "string"
+            }
+        },
+        {
+            "file_name": "cfg_AttrEvent",
+            "file_path": "./data/config/data/cfg_AttrEvent.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "AttrEventId": "int",
+                "AttrEventDescribe": "string",
+                "EventType": "int",
+                "IsForever": "bool",
+                "DelayTime": "ulong",
+                "Param1": "float",
+                "Param2": "float",
+                "Param3": "float",
+                "ParamList": "List<List<float>>"
+            }
+        },
+        {
+            "file_name": "cfg_GenerateBottomMap",
+            "file_path": "./data/config/data/cfg_GenerateBottomMap.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "GenerateMapId": "int",
+                "GenerateMapName": "string",
+                "CameraId": "int",
+                "Width": "int",
+                "Height": "int",
+                "IsNeedWall": "bool",
+                "WallThickness": "int",
+                "DefaultMaterialId": "int",
+                "WallMaterialId": "int",
+                "WallImageId": "int",
+                "IsUseNoiseEdit": "bool",
+                "SeedTypeId": "int",
+                "IsDensityContrary": "bool",
+                "Density": "int",
+                "WallParamList": "List<List<int>>",
+                "AdornLayerIdList": "List<int>",
+                "ExtraDrawIdList": "List<int>",
+                "BigStructIdList": "List<int>",
+                "IsClearWall": "bool",
+                "IsClearDefine": "bool",
+                "MinWallMeasure": "int",
+                "MinDefineMeasure": "int",
+                "IsDrawPass": "bool",
+                "PassMaterialId": "int",
+                "PassWidth": "int"
+            }
+        },
+        {
+            "file_name": "cfg_MapMaterial",
+            "file_path": "./data/config/data/cfg_MapMaterial.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "MaterialId": "int",
+                "MaterialName": "string",
+                "Probability": "float",
+                "ImageSetId": "int",
+                "ImageSetIndex": "int",
+                "Parame": "float"
+            }
+        },
+        {
+            "file_name": "cfg_MapExtraDraw",
+            "file_path": "./data/config/data/cfg_MapExtraDraw.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "MapDrawId": "int",
+                "DrawType": "int",
+                "Param1": "float",
+                "Param2": "float",
+                "Param3": "Vector2",
+                "Param4": "Vector2",
+                "ParamList": "List<List<float>>"
+            }
+        },
+        {
+            "file_name": "cfg_GenerateBigStruct",
+            "file_path": "./data/config/data/cfg_GenerateBigStruct.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "BigStructId": "int",
+                "BigStructName": "string",
+                "Layer": "int",
+                "Size": "List<int>",
+                "StructList": "List<List<int>>",
+                "GeneratBigType": "int",
+                "IsUserSeed": "bool",
+                "Seed": "int",
+                "Probability": "float",
+                "PosList": "List<List<int>>"
+            }
+        },
+        {
+            "file_name": "cfg_GenerateAdornMap",
+            "file_path": "./data/config/data/cfg_GenerateAdornMap.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "AdornMapId": "int",
+                "Layer": "int",
+                "SeedTypeId": "int",
+                "MaterialIdList": "List<List<int>>",
+                "BigStructIdList": "List<int>"
+            }
+        },
+        {
+            "file_name": "cfg_MapWall",
+            "file_path": "./data/config/data/cfg_MapWall.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "WallId": "int",
+                "WallDescribe": "string"
+            }
+        },
+        {
+            "file_name": "cfg_ChapterBase",
+            "file_path": "./data/config/data/cfg_ChapterBase.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ChapterId": "int",
+                "ChapterName": "string",
+                "Describe1": "string",
+                "Describe2": "string",
+                "ChapterType": "int",
+                "BigMapBaseId": "int",
+                "ChapterImage": "Texture2D",
+                "ChapterStartCopy": "List<int>"
+            }
+        },
+        {
+            "file_name": "cfg_ChapterCopyBase",
+            "file_path": "./data/config/data/cfg_ChapterCopyBase.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ChapterId": "int",
+                "CopyId": "int",
+                "CopyName": "string",
+                "Describe1": "string",
+                "Describe2": "string",
+                "GenerateMapId": "int",
+                "CopyIdList": "List<int>"
+            }
+        },
+        {
+            "file_name": "cfg_ChapterCopyUI",
+            "file_path": "./data/config/data/cfg_ChapterCopyUI.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ChapterId": "int",
+                "CopyId": "int",
+                "ShowName": "string",
+                "Pos": "Vector2",
+                "Size": "Vector2",
+                "ShowImage": "Texture2D"
+            }
+        },
+        {
             "file_name": "cfg_ziyuan",
             "file_path": "./data/config/data/cfg_ziyuan.json",
             "key_list": {
@@ -143,6 +583,17 @@
                 "ItemBaseDescribe": "string",
                 "ItemImg": "Texture2D",
                 "image": "Texture2D"
+            }
+        },
+        {
+            "file_name": "cfg_CampBase",
+            "file_path": "./data/config/data/cfg_CampBase.json",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "CampId": "int",
+                "CampName": "string",
+                "CampDes": "string",
+                "CopyId": "Texture2D"
             }
         }
     ]

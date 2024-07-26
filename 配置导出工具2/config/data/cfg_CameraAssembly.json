@@ -1,0 +1,22 @@
+[
+    {
+        "KEY_INDEX": "1",
+        "AssemblyId": 1,
+        "Type": 0,
+        "Pparam": 0,
+        "Offset": [
+            40.0,
+            23.0
+        ]
+    },
+    {
+        "KEY_INDEX": "2",
+        "AssemblyId": 2,
+        "Type": 1,
+        "Pparam": 0,
+        "Offset": [
+            0.0,
+            0.0
+        ]
+    }
+]

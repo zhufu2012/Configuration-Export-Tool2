@@ -54,7 +54,6 @@ def read_excel_data(filename_path):
     # 加载 Excel 文件
     workbook = openpyxl.load_workbook(filename_path, data_only=False)
     sheet_name_list = workbook.get_sheet_names()
-    sheet_list = []
     data = []  # data就是文本信息
     image_list = []
     for sheet_name in sheet_name_list:
@@ -78,6 +77,7 @@ def read_excel_data(filename_path):
                     row_data.append(cell.value)
             data.append(row_data)
     return data, image_list
+
 
 ##检测文件是否在zip文件中
 def checkzipfile_exists(zip_filename, filename):
@@ -137,7 +137,7 @@ def output_id_image(xlsx_file_path):
     data, image_list = read_excel_data(xlsx_file_path)
     name_to_target_map = get_xml_id_image_map(xlsx_file_path)
     if name_to_target_map == None:
-        Config.add_log(f"导出异常！配置文件:[{xlsx_file_path}]下，没有检测到图片存在，请确认是否有问题！")
+        # Config.add_log(f"导出异常！配置文件:[{xlsx_file_path}]下，没有检测到图片存在，请确认是否有问题！")
         return None
     # 构建id_image_对
     new_map = {key: name_to_target_map.get(key) for key in image_list if key in name_to_target_map}
@@ -157,3 +157,64 @@ def output_id_image(xlsx_file_path):
                         new_file.write(image_content)
             else:
                 Config.add_log(f"导出异常！xlsx内部路径： {actual_image_path} 没找到，未导出图片{image_path} ,相关数据{key} ")
+
+
+# region  文件相关操作
+# 根节点，文件夹，文件
+def next_file(root, dirs, files):
+    list = []
+    for file in files:
+        list.append(root + "\\" + file)
+    return list
+
+
+# 读取路径下，每一层的路径
+def get_files_from_directory(directory):
+    file_list = []
+    for root, dirs, files in os.walk(directory):  # 每一层文件夹数据
+        list = next_file(root, dirs, files)
+        file_list = file_list + list
+    return file_list
+
+
+##读取路径下所有xlsx表中，可用导出的xlsx表以及子表名称
+def get_xlsx_key_name():
+    pathlist = get_files_from_directory(Config.load_data_key("工具读取的xlsx文件夹路径"))  ##路径下所有文件数据
+    dicts = {}  ##列表中保存 字典  字典中保存{xlsx表路径：[子表名称]}
+    for file_path in pathlist:  ##对每一个配置文件进行处理
+        if file_path.find("~$") != -1:
+            continue
+        if file_path.endswith(".xlsx"):
+            xls = pd.ExcelFile(file_path)
+            table_names = xls.sheet_names  # 获取所有表名
+            list = []
+            for table_name in table_names:
+                if not table_name.startswith("cfg_"):  ##开头不是cfg_的表都不算
+                    continue
+                list.append(table_name)
+            if len(list) != 0:
+                dicts[file_path] = list
+    return dicts
+
+
+##读取所有xlsx表的每个子表的列名 和 导出选项 和键名称
+def read_sheet_name():
+    dicts = get_xlsx_key_name()
+    result_dict = {}
+    for path in dicts.keys():
+        sheet_name_dict = {}
+        for sheet_name in dicts[path]:
+            data = pd.read_excel(path, header=None, sheet_name=sheet_name)
+            result_list = []
+            for index, row_list in data.iterrows():  # 遍历每一行数据
+                result = []
+                if index == 0 or index == 1 or index == 2:  # 第一行 备注行  第二行 导出选项，第三行 字段名称
+                    for i, row in enumerate(row_list):
+                        result.append(row)
+                result_list.append(result)
+            sub_table_name = sheet_name  ##一个子表的名称
+            if sheet_name.find("_") != sheet_name.rfind("_"):
+                sub_table_name = sheet_name[:sheet_name.rfind("_")]
+            sheet_name_dict[sub_table_name] = result_list
+        result_dict[path] = sheet_name_dict
+    return result_dict

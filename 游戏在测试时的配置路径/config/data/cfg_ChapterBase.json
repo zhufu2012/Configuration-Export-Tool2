@@ -1,0 +1,15 @@
+[
+    {
+        "KEY_INDEX": "1",
+        "ChapterId": 1,
+        "ChapterName": "第一章",
+        "Describe1": "第一章描述1",
+        "Describe2": "第一章描述2",
+        "ChapterType": 1,
+        "BigMapBaseId": 1,
+        "ChapterImage": "null",
+        "ChapterStartCopy": [
+            1
+        ]
+    }
+]

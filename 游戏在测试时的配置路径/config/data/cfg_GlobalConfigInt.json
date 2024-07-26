@@ -1,0 +1,14 @@
+[
+    {
+        "KEY_INDEX": "BigMapDefineCameraId",
+        "Configid": "BigMapDefineCameraId",
+        "ConfigName": "大地图默认相机id",
+        "ConfigValue": 1
+    },
+    {
+        "KEY_INDEX": "MapDefineCameraId",
+        "Configid": "MapDefineCameraId",
+        "ConfigName": "地图默认相机id",
+        "ConfigValue": 2
+    }
+]

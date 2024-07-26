@@ -1,0 +1,17 @@
+[
+    {
+        "KEY_INDEX": "_1_1",
+        "ChapterId": 1,
+        "CopyId": 1,
+        "ShowName": "1.1",
+        "Pos": [
+            100.0,
+            100.0
+        ],
+        "Size": [
+            100.0,
+            100.0
+        ],
+        "ShowImage": "./data/config/images/ID_B5D7B728C0CA48D2807A7783518CE6BD.png"
+    }
+]

@@ -1,4 +1,4 @@
 @echo off
 
-python ConfigExportView.pyw
+pythonw ConfigExportView.pyw
 pause

@@ -1,50 +1,15 @@
 [
     {
-        "KEY_INDEX": "1",
-        "Tower_Id": 1,
-        "DisplayText": "TowerBase_DisplayText_1",
-        "DisplayDescription": "TowerBase_DisplayDescription_1",
-        "TagIdList": [],
-        "Price": [
-            [
-                1,
-                300
-            ],
-            [
-                2,
-                300
-            ]
-        ],
-        "Mass": 10000,
-        "TechCondition": [],
-        "Radius": 20.0,
-        "DisplayRadius": 20.0,
-        "FogOfWarSightRange": 30.0,
-        "IsBuilding": true,
-        "Footprint": []
-    },
-    {
         "KEY_INDEX": "2",
-        "Tower_Id": 2,
-        "DisplayText": "TowerBase_DisplayText_2",
-        "DisplayDescription": "TowerBase_DisplayDescription_2",
-        "TagIdList": [],
-        "Price": [
-            [
-                1,
-                500
-            ],
-            [
-                2,
-                600
-            ]
+        "TowerId": 2,
+        "TowerName": "自律体-2",
+        "ObjectId": 2,
+        "CampId": 1,
+        "TowerSize": [
+            3,
+            3
         ],
-        "Mass": 20000,
-        "TechCondition": [],
-        "Radius": 30.0,
-        "DisplayRadius": 30.0,
-        "FogOfWarSightRange": 30.0,
-        "IsBuilding": true,
-        "Footprint": []
+        "TowerBasePng": "./data/config/images/ID_4C4D1FAD5AA44644B7F1CECCC9C16E01.png",
+        "TowerWeaponPng": "./data/config/images/ID_60093FF816494811AB729722741C5358.png"
     }
 ]
