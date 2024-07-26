@@ -112,25 +112,6 @@ namespace Remnant_Afterglow
             }
         }
 
-
-        /// <summary>
-        /// 读取全局默认配置,不是全局配置，这个只是默认配置
-        /// </summary>
-        public static object GetDefineCfg(string fileName, string Key)
-        {
-            object value = null;
-            if (config_dict.ContainsKey(fileName))
-            {
-                if (config_dict[fileName].ContainsKey(Key))
-                {
-                    string type = (string)config_dict[fileName][Key]["ConfigType"];//数据类型
-                }
-            }
-            return value;
-        }
-
-
-
         /// <summary>
         /// 读取某配置 所有
         /// </summary>
