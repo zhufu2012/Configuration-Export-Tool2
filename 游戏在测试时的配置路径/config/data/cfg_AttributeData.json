@@ -1,6 +1,6 @@
 [
     {
-        "KEY_INDEX": "_1_1_1",
+        "KEY_INDEX": "1_1_1",
         "ObjectType": 1,
         "ObjectId": 1,
         "AttributeId": 1,
@@ -27,7 +27,7 @@
         ]
     },
     {
-        "KEY_INDEX": "_1_1_2",
+        "KEY_INDEX": "1_1_2",
         "ObjectType": 1,
         "ObjectId": 1,
         "AttributeId": 2,
@@ -47,7 +47,7 @@
         ]
     },
     {
-        "KEY_INDEX": "_1_1_3",
+        "KEY_INDEX": "1_1_3",
         "ObjectType": 1,
         "ObjectId": 1,
         "AttributeId": 3,
@@ -67,7 +67,7 @@
         ]
     },
     {
-        "KEY_INDEX": "_1_1_4",
+        "KEY_INDEX": "1_1_4",
         "ObjectType": 1,
         "ObjectId": 1,
         "AttributeId": 4,
@@ -87,7 +87,7 @@
         ]
     },
     {
-        "KEY_INDEX": "_1_2_1",
+        "KEY_INDEX": "1_2_1",
         "ObjectType": 1,
         "ObjectId": 2,
         "AttributeId": 1,
@@ -99,7 +99,7 @@
         "AttrEventIdList": []
     },
     {
-        "KEY_INDEX": "_1_2_2",
+        "KEY_INDEX": "1_2_2",
         "ObjectType": 1,
         "ObjectId": 2,
         "AttributeId": 2,
@@ -111,7 +111,7 @@
         "AttrEventIdList": []
     },
     {
-        "KEY_INDEX": "_1_2_3",
+        "KEY_INDEX": "1_2_3",
         "ObjectType": 1,
         "ObjectId": 2,
         "AttributeId": 3,
@@ -123,7 +123,7 @@
         "AttrEventIdList": []
     },
     {
-        "KEY_INDEX": "_1_2_4",
+        "KEY_INDEX": "1_2_4",
         "ObjectType": 1,
         "ObjectId": 2,
         "AttributeId": 4,

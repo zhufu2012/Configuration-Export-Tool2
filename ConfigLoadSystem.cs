@@ -48,8 +48,8 @@ namespace Remnant_Afterglow
         }
 
 
-        //异步加载配置
-        private async void LoadConfigDataAsync()
+        //异步加载配置  可async
+        private void LoadConfigDataAsync()
         {
             //await Task.Run(() =>{
 
