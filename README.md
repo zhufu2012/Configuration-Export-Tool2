@@ -6,6 +6,10 @@
 （2.0版本的配置工具代码更新了，但是工具帮助文档还没更新,但是配置的方式基本没变
 （现在最后一行第一个格子不需要一定是2了））
 
+运行方式：
+双击 配置导出工具2\导出基础配置2.0.bat 运行完成，会弹出黑窗口，可删除
+
+
 配置这个工具的方式：
 1.得下载安装python
 2.安装python的包
@@ -44,13 +48,13 @@ file_name的json中每个表都有三个字段file_name,file_path,key_list
 双击这个文件就行，然后你可以看到有个数据类型的表，再次双击它就可以添加了哈！！
 
 目前可以导出的类型有30来种：
-BOOL、SHORT、INT、LONG、FLOAT、STR、
-<BOOL>、<SHORT>、<INT>、<LONG>、
-<FLOAT>、<STR>、(BOOL)、(SHORT)、
-(INT)、(LONG)、(FLOAT)、(STR)、<(BOOL)>、
-<(SHORT)>、<(INT)>、<(LONG)>、<(FLOAT)>、
-<(STR)>、LANG、POINT、<LANG>、<POINT>、
-PNG、Vector2I、ULONG、
+BOOL、SHORT、INT、LONG、FLOAT、STR
+<BOOL>、<SHORT>、<INT>、<LONG>
+<FLOAT>、<STR>、(BOOL)、(SHORT)
+(INT)、(LONG)、(FLOAT)、(STR)、<(BOOL)>
+<(SHORT)>、<(INT)>、<(LONG)>、<(FLOAT)> 
+<(STR)>、LANG、POINT、<LANG>、<POINT>
+PNG、Vector2I、ULONG
 
 特殊类型：
 POINT   一个坐标(小数坐标)  转换为godot中的Vector2

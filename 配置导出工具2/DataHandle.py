@@ -164,7 +164,8 @@ def row_data_conver(file_path, table_name, line, row_data, main_key_row, key_row
     if len(main_key_row) == 1:
         key_index = str(row_data[main_key_row[0]])
     else:
-        for main_row in main_key_row:
+        key_index = str(row_data[main_key_row[0]])
+        for main_row in main_key_row[1:]:
             key_index = key_index + "_" + str(row_data[main_row])
     key_dict["KEY_INDEX"] = key_index
     for row in key_row:
