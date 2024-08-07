@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Godot;
 namespace Remnant_Afterglow
 {
     public class Enemy

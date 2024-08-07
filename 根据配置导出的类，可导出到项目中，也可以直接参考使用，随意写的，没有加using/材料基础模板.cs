@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
     public class 材料基础模板
