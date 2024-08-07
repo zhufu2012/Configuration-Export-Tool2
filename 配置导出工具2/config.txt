@@ -21,5 +21,11 @@
     "复制时删除测试路径" : "../游戏在测试时的配置路径/config/",
     "配置文件复制到项目测试路径" : "../游戏在测试时的配置路径/config/data/",
     "PNG资源复制到项目测试路径" : "../游戏在测试时的配置路径/config/images/",
-    "flie_name.json复制到项目测试路径" : "../游戏在测试时的配置路径/config/"
+    "flie_name.json复制到项目测试路径" : "../游戏在测试时的配置路径/config/",
+	
+	"默认开头添加的库名" : "using System.Collections.Generic;\n",
+    "导出类型对应库名称" : {
+        "Texture2D": "using Godot;\n",
+		"Vector2": "using Godot;\n"
+    }
 }

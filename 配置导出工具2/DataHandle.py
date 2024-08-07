@@ -318,7 +318,8 @@ def export_config_file(image_path_list, data_dict, data_key_dict):
                                      "key_list": data_key_dict[table_name]})
     ##生成基础配置文件
     if isCompact:
-        languages_table_name_text = json.dumps({"cfg_files": languages_table_name}, separators=(',', ':'), indent=None, ensure_ascii=False) #紧凑版
+        languages_table_name_text = json.dumps({"cfg_files": languages_table_name}, separators=(',', ':'), indent=None,
+                                               ensure_ascii=False)  # 紧凑版
     else:
         languages_table_name_text = json.dumps({"cfg_files": languages_table_name}, indent=4, ensure_ascii=False)
     ##languages_table_name_text = json.dumps({"cfg_files": languages_table_name}, separators=(',', ':'), indent=None, ensure_ascii=False) #紧凑版
@@ -353,7 +354,12 @@ def export_config_class(data_dict, data_key_dict):
 
 
 ##对该路径下所有xlsx文件的数据处理后，导出配置
-def AllXlsxDataHandle(path):
+def AllXlsxDataHandle(path, isCompacts):
+    global isCompact
+    if isCompacts == 1:
+        isCompact = False
+    else:
+        isCompact = True
     Config.close_log()  ##清除日志
     pathlist = get_files_from_directory(path)  ##路径下所有文件数据
     data = data_conver(pathlist)

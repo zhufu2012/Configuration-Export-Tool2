@@ -95,8 +95,11 @@ def get_xml_id_image_map(xlsx_file_path):
         if 'xl/cellimages.xml' in pathlist:
             with zfile.open('xl/cellimages.xml') as file:
                 xml_content = file.read()
-            with zfile.open('xl/_rels/cellimages.xml.rels') as file:
-                relxml_content = file.read()
+            if 'xl/_rels/cellimages.xml.rels' in pathlist:
+                with zfile.open('xl/_rels/cellimages.xml.rels') as file:
+                    relxml_content = file.read()
+            else:
+                return None
         else:
             return None
     # 将读取的内容转换为 XML 树

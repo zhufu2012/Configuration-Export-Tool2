@@ -1,14 +1,37 @@
+import Config
+
 class CSharpClassGenerator:
     def __init__(self, data):
         self.data = data
+        self.Config = Config.load_data()
+        self.define_str = self.Config["默认开头添加的库名"]
+        self.class_str_dict = self.Config["导出类型对应库名称"]
 
+
+    def combine_strings(self, input_string):
+        str_to_return = ""
+        class_dict = {}
+        # 遍历字典中的键
+        for key in self.class_str_dict.keys():
+            # 检查输入字符串是否包含当前键
+            if key in input_string:
+                # 如果包含，则将对应的值添加到返回的字符串中
+                class_dict[self.class_str_dict[key]] = self.class_str_dict[key]
+        for key in class_dict.keys():
+            str_to_return += key
+
+        return str_to_return
     def generate_class(self,result_dict):
         class_name = self._get_class_name()
         properties = self._generate_properties(result_dict)
         constructor = self._generate_constructor()
         constructor2 = self._generate_constructor2()
-        return f'namespace Remnant_Afterglow\n{{\n    public class {class_name}\n    ' + '{\n        #region 参数及初始化\n' + properties + '\n' +\
-               constructor+"\n        " +constructor2+ '    }\n}\n'
+        allstr = f'namespace Remnant_Afterglow\n{{\n    public class {class_name}\n    ' + '{\n        #region 参数及初始化\n' + properties + '\n' + \
+                 constructor+"\n        " +constructor2+ '    }\n}\n'
+        class_str=self.combine_strings(allstr)
+
+
+        return self.define_str + class_str+allstr
 
     def _get_class_name(self):
         return self.data['file_name'][4:5].upper() + self.data['file_name'][5:]

@@ -13,11 +13,14 @@ class FileBrowserApp:
         self.select_path = ""  ##当前选中的文件或者文件夹路径
         self.error_table_path = ""  ##当前报错表路径
 
+        self.option_var1 = tk.IntVar(value=1)  # 是否将导出的配置压缩
+        self.option_var2 = tk.IntVar(value=1)  # 双击打开配置还是打开代码
+
         self.root = root
         self.root.title("配置导出工具")
         self.root.geometry("700x450")  # 设置窗口大小
         self.root.resizable(False, False)
-        self.create_menu()
+        ##self.create_menu()
         self.create_frames()
         self.bind_events()
 
@@ -74,7 +77,6 @@ class FileBrowserApp:
         # 创建标签用于显示文件名
         self.file_label = tk.Label(self.right_frame, text="", font=('Arial', 12))
         self.file_label.pack(pady=5)
-
         # 创建标签用于显示文件名
         self.err_label = tk.Label(self.right_frame2, text="", wraplength=400)
         self.err_label.pack(pady=5)
@@ -82,6 +84,18 @@ class FileBrowserApp:
         # 创建一个 Frame 用于包裹按钮，然后将按钮放置在该 Frame 中
         button_frame = tk.Frame(self.right_frame)
         button_frame.pack(pady=5)
+
+        # 创建单选按钮
+        radio_frame = tk.Frame(self.right_frame)
+        radio_frame.pack(pady=5, side=tk.LEFT)  # 单选按钮放在左侧
+
+        # 第一组单选按钮
+        tk.Radiobutton(radio_frame, text="导出配置不压缩", variable=self.option_var1, value=1).pack(anchor=tk.W)
+        tk.Radiobutton(radio_frame, text="导出配置压缩", variable=self.option_var1, value=2).pack(anchor=tk.W)
+
+        # 第二组单选按钮
+        tk.Radiobutton(radio_frame, text="双击打开配置", variable=self.option_var2, value=1).pack(anchor=tk.W)
+        tk.Radiobutton(radio_frame, text="双击打开代码", variable=self.option_var2, value=2).pack(anchor=tk.W)
 
         # 创建按钮用于操作，并指定它们所在的 Frame 为 button_frame
         self.export_all_btn = tk.Button(button_frame, text="导出配置", command=self.export_all)
@@ -125,16 +139,26 @@ class FileBrowserApp:
 
     ##双击列表框的一项数据
     def on_double_click(self, event):
-        selected_indices = app.listbox.curselection()  # 获取选中的项的索引
-        if len(selected_indices) == 1:  # 只有当选中一项时才触发操作
-            selected_item = app.listbox.get(selected_indices[0])  # 获取选中的项的文本
-            print("双击项的文字：", self.select_path + "   子表：" + selected_item)
+        if self.option_var2.get() == 1:## 双击 打开配置
+            selected_indices = app.listbox.curselection()  # 获取选中的项的索引
+            if len(selected_indices) == 1:  # 只有当选中一项时才触发操作
+                selected_item = app.listbox.get(selected_indices[0])  # 获取选中的项的文本
+                print("双击项的文字：", self.select_path + "   子表：" + selected_item)
 
-            sub_table_name = selected_item  ##一个子表的名称
-            if selected_item.find("_") != selected_item.rfind("_"):
-                sub_table_name = selected_item[:selected_item.rfind("_")]
+                sub_table_name = selected_item  ##一个子表的名称
+                if selected_item.find("_") != selected_item.rfind("_"):
+                    sub_table_name = selected_item[:selected_item.rfind("_")]
+                os.startfile(os.path.abspath(ConfigData["工具导出配置的存放路径"] + sub_table_name + ConfigData["导出的数据后缀"]))
+        else:##双击打开类文件
+            selected_indices = app.listbox.curselection()  # 获取选中的项的索引
+            if len(selected_indices) == 1:  # 只有当选中一项时才触发操作
+                selected_item = app.listbox.get(selected_indices[0])  # 获取选中的项的文本
+                sub_table_name = selected_item  ##一个子表的名称
+                if selected_item.find("_") != selected_item.rfind("_"):
+                    sub_table_name = selected_item[:selected_item.rfind("_")]
+                print(os.path.abspath(ConfigData["工具导出配置类存放路径"] + sub_table_name[4:] + ".cs"))
+                os.startfile(os.path.abspath(ConfigData["工具导出配置类存放路径"] + sub_table_name[4:] + ".cs"))
 
-            os.startfile(os.path.abspath(ConfigData["工具导出配置的存放路径"] + sub_table_name + ConfigData["导出的数据后缀"]))
 
     def on_left_click(self, event):
         # 处理鼠标左键点击事件
@@ -192,7 +216,8 @@ class FileBrowserApp:
 
     ##导出配置
     def export_all(self):
-        DataHandle.AllXlsxDataHandle(ConfigData["工具读取的xlsx文件夹路径"])
+        print(self.option_var1.get())
+        DataHandle.AllXlsxDataHandle(ConfigData["工具读取的xlsx文件夹路径"],self.option_var1.get())
         error_text = Config.read_log()
         #print(error_text)
         if error_text.find("导出失败") != -1:

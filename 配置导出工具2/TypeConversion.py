@@ -2,6 +2,7 @@ import read_xlsx
 import Config
 import numpy as np
 
+
 def number_to_column_name(n):
     result = ""
     while n > 0:
@@ -64,7 +65,7 @@ def TO_UINT64(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_FLOAT(file_path, table_name, Col_x, Col_y, variable):
     try:
-        if str(variable)=="nan":
+        if str(variable) == "nan":
             raise Exception("")
         converted_variable = float(variable)
         return converted_variable
@@ -151,10 +152,14 @@ def TO_STR_LIST(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_BOOL_TUPLE(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string representing a tuple of boolean values
-        values = variable.strip('()').split(',')
-        return tuple(
-            True if (val.strip().lower() == 'true' or val.strip().lower() == 'TRUE') else False for val in values)
+        if variable.find("(") != -1 or variable.find(")") != -1:
+            values = variable.strip('()').split(',')
+            return tuple(
+                True if (val.strip().lower() == 'true' or val.strip().lower() == 'TRUE') else False for val in values)
+        else:
+            values = variable.strip('（）').split(',')
+            return tuple(
+                True if (val.strip().lower() == 'true' or val.strip().lower() == 'TRUE') else False for val in values)
     except Exception as e:
         Config.add_log(
             f"导出失败！  配置文件:[{file_path}]  子表：{table_name} 第{Col_y}行，第{number_to_column_name(Col_x)}列 ，数据:[{variable}]转换为BOOL元组时出现错误：{e}")
@@ -163,9 +168,12 @@ def TO_BOOL_TUPLE(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_BYTE_TUPLE(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string representing a tuple of byte values
-        values = variable.strip('()').split(',')
-        return tuple(int(val.strip()).to_bytes(1, byteorder='big') for val in values)
+        if variable.find("(") != -1 or variable.find(")") != -1:
+            values = variable.strip('()').split(',')
+            return tuple(int(val.strip()).to_bytes(1, byteorder='big') for val in values)
+        else:
+            values = variable.strip('（）').split(',')
+            return tuple(int(val.strip()).to_bytes(1, byteorder='big') for val in values)
     except Exception as e:
         Config.add_log(
             f"导出失败！  配置文件:[{file_path}]  子表：{table_name} 第{Col_y}行，第{number_to_column_name(Col_x)}列 ，数据:[{variable}]转换为BYTE元组时出现错误：{e}")
@@ -174,9 +182,12 @@ def TO_BYTE_TUPLE(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_INT_TUPLE(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string representing a tuple of byte values
-        values = variable.strip('()').split(',')
-        return tuple(int(val.strip()) for val in values)
+        if variable.find("(") != -1 or variable.find(")") != -1:
+            values = variable.strip('()').split(',')
+            return tuple(int(val.strip()) for val in values)
+        else:
+            values = variable.strip('（）').split(',')
+            return tuple(int(val.strip()) for val in values)
     except Exception as e:
         Config.add_log(
             f"导出失败！  配置文件:[{file_path}]  子表：{table_name} 第{Col_y}行，第{number_to_column_name(Col_x)}列 ，数据:[{variable}]转换为INT元组时出现错误：{e}")
@@ -185,9 +196,12 @@ def TO_INT_TUPLE(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_UINT64_TUPLE(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string representing a tuple of unsigned integers
-        values = variable.strip('()').split(',')
-        return tuple(int(val.strip()) for val in values)
+        if variable.find("(") != -1 or variable.find(")") != -1:
+            values = variable.strip('()').split(',')
+            return tuple(int(val.strip()) for val in values)
+        else:
+            values = variable.strip('（）').split(',')
+            return tuple(int(val.strip()) for val in values)
     except Exception as e:
         Config.add_log(
             f"导出失败！  配置文件:[{file_path}]  子表：{table_name} 第{Col_y}行，第{number_to_column_name(Col_x)}列 ，数据:[{variable}]转换为UINT64元组时出现错误：{e}")
@@ -196,9 +210,12 @@ def TO_UINT64_TUPLE(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_FLOAT_TUPLE(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string representing a tuple of floats
-        values = variable.strip('()').split(',')
-        return tuple(float(val.strip()) for val in values)
+        if variable.find("(") != -1 or variable.find(")") != -1:
+            values = variable.strip('()').split(',')
+            return tuple(float(val.strip()) for val in values)
+        else:
+            values = variable.strip('（）').split(',')
+            return tuple(float(val.strip()) for val in values)
     except Exception as e:
         Config.add_log(
             f"导出失败！  配置文件:[{file_path}]  子表：{table_name} 第{Col_y}行，第{number_to_column_name(Col_x)}列 ，数据:[{variable}]转换为FLOAT元组时出现错误：{e}")
@@ -207,9 +224,12 @@ def TO_FLOAT_TUPLE(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_STR_TUPLE(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string representing a tuple of strings
-        values = variable.strip('()').split(',')
-        return tuple(str(val.strip()) for val in values)
+        if variable.find("(") != -1 or variable.find(")") != -1:
+            values = variable.strip('()').split(',')
+            return tuple(str(val.strip()) for val in values)
+        else:
+            values = variable.strip('（）').split(',')
+            return tuple(str(val.strip()) for val in values)
     except Exception as e:
         Config.add_log(
             f"导出失败！  配置文件:[{file_path}]  子表：{table_name} 第{Col_y}行，第{number_to_column_name(Col_x)}列 ，数据:[{variable}]转换为STR元组时出现错误：{e}")
@@ -218,14 +238,19 @@ def TO_STR_TUPLE(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_BOOL_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string with tuples of boolean values separated by '|'
         tuples = variable.replace("\n", "").split('|')
         result = []
         for tup in tuples:
-            values = tup.strip('()').split(',')
-            bool_tuple = tuple(
-                True if (val.strip().lower() == 'true' or val.strip().lower() == 'TRUE') else False for val in values)
-            result.append(bool_tuple)
+            if tup.find("(") != -1 or tup.find(")") != -1:
+                values = tup.strip('()').split(',')
+                bool_tuple = tuple(
+                    True if (val.strip().lower() == 'true' or val.strip().lower() == 'TRUE') else False for val in values)
+                result.append(bool_tuple)
+            else:
+                values = tup.strip('（）').split(',')
+                bool_tuple = tuple(
+                    True if (val.strip().lower() == 'true' or val.strip().lower() == 'TRUE') else False for val in values)
+                result.append(bool_tuple)
         return result
     except Exception as e:
         Config.add_log(
@@ -235,13 +260,17 @@ def TO_BOOL_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_BYTE_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string with tuples of byte values separated by '|'
         tuples = variable.replace("\n", "").split('|')
         result = []
         for tup in tuples:
-            values = tup.strip('()').split(',')
-            byte_tuple = tuple(int(val.strip()).to_bytes(1, byteorder='big') for val in values)
-            result.append(byte_tuple)
+            if tup.find("(") != -1 or tup.find(")") != -1:
+                values = tup.strip('()').split(',')
+                byte_tuple = tuple(int(val.strip()).to_bytes(1, byteorder='big') for val in values)
+                result.append(byte_tuple)
+            else:
+                values = tup.strip('（）').split(',')
+                byte_tuple = tuple(int(val.strip()).to_bytes(1, byteorder='big') for val in values)
+                result.append(byte_tuple)
         return result
     except Exception as e:
         Config.add_log(
@@ -251,13 +280,17 @@ def TO_BYTE_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_INT_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string with tuples of integers separated by '|'
         tuples = variable.replace("\n", "").split('|')
         result = []
         for tup in tuples:
-            values = tup.strip('()').split(',')
-            int_tuple = tuple(int(val.strip()) for val in values)
-            result.append(int_tuple)
+            if tup.find("(") != -1 or tup.find(")") != -1:
+                values = tup.strip('()').split(',')
+                int_tuple = tuple(int(val.strip()) for val in values)
+                result.append(int_tuple)
+            else:
+                values = tup.strip('（）').split(',')
+                int_tuple = tuple(int(val.strip()) for val in values)
+                result.append(int_tuple)
         return result
     except Exception as e:
         Config.add_log(
@@ -267,13 +300,17 @@ def TO_INT_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_UINT64_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string with tuples of unsigned integers separated by '|'
         tuples = variable.replace("\n", "").split('|')
         result = []
         for tup in tuples:
-            values = tup.strip('()').split(',')
-            uint64_tuple = tuple(int(val.strip()) for val in values)
-            result.append(uint64_tuple)
+            if tup.find("(") != -1 or tup.find(")") != -1:
+                values = tup.strip('()').split(',')
+                uint64_tuple = tuple(int(val.strip()) for val in values)
+                result.append(uint64_tuple)
+            else:
+                values = tup.strip('（）').split(',')
+                uint64_tuple = tuple(int(val.strip()) for val in values)
+                result.append(uint64_tuple)
         return result
     except Exception as e:
         Config.add_log(
@@ -283,13 +320,17 @@ def TO_UINT64_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_FLOAT_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string with tuples of floats separated by '|'
         tuples = variable.replace("\n", "").split('|')
         result = []
         for tup in tuples:
-            values = tup.strip('()').split(',')
-            float_tuple = tuple(float(val.strip()) for val in values)
-            result.append(float_tuple)
+            if tup.find("(") != -1 or tup.find(")") != -1:
+                values = tup.strip('()').split(',')
+                float_tuple = tuple(float(val.strip()) for val in values)
+                result.append(float_tuple)
+            else:
+                values = tup.strip('（）').split(',')
+                float_tuple = tuple(float(val.strip()) for val in values)
+                result.append(float_tuple)
         return result
     except Exception as e:
         Config.add_log(
@@ -299,13 +340,17 @@ def TO_FLOAT_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
 
 def TO_STR_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
     try:
-        # Assuming variable is a string with tuples of strings separated by '|'
         tuples = variable.split('|')
         result = []
         for tup in tuples:
-            values = tup.strip('()').split(',')
-            str_tuple = tuple(str(val.strip()) for val in values)
-            result.append(str_tuple)
+            if tup.find("(") != -1 or tup.find(")") != -1:
+                values = tup.strip('()').split(',')
+                str_tuple = tuple(str(val.strip()) for val in values)
+                result.append(str_tuple)
+            else:
+                values = tup.strip('（）').split(',')
+                str_tuple = tuple(str(val.strip()) for val in values)
+                result.append(str_tuple)
         return result
     except Exception as e:
         Config.add_log(
@@ -356,7 +401,7 @@ def TO_SHORT_TUPLE_LIST(file_path, table_name, Col_x, Col_y, variable):
 def TO_PNG(file_path, table_name, Col_x, Col_y, variable):
     try:
         # Assuming variable is a string with tuples of short values separated by '|'
-        if str(variable)=="nan":
+        if str(variable) == "nan":
             raise Exception("")
         else:
             path1 = variable[variable.find("\"") + 1:]
