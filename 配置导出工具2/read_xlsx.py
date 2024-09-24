@@ -58,7 +58,7 @@ def read_excel_data(filename_path):
     image_list = []
     for sheet_name in sheet_name_list:
         sheet = workbook.get_sheet_by_name(sheet_name)
-        print(sheet)
+        ##print(sheet)
         for row in sheet.iter_rows(min_row=1, values_only=False):
             row_data = []
             for cell in row:

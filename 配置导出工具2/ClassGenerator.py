@@ -1,5 +1,6 @@
 import Config
 
+##根据数据合成一个配置类
 class CSharpClassGenerator:
     def __init__(self, data):
         self.data = data
@@ -26,7 +27,7 @@ class CSharpClassGenerator:
         properties = self._generate_properties(result_dict)
         constructor = self._generate_constructor()
         constructor2 = self._generate_constructor2()
-        allstr = f'namespace Remnant_Afterglow\n{{\n    public class {class_name}\n    ' + '{\n        #region 参数及初始化\n' + properties + '\n' + \
+        allstr = f'namespace Remnant_Afterglow\n{{\n    public partial class {class_name}\n    ' + '{\n        #region 参数及初始化\n' + properties + '\n' + \
                  constructor+"\n        " +constructor2+ '    }\n}\n'
         class_str=self.combine_strings(allstr)
 

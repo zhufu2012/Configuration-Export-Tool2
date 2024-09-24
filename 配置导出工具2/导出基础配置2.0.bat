@@ -1,4 +1,3 @@
 @echo off
-
-pythonw ConfigExportView.pyw
-pause
+start "" /B pythonw ConfigExportView.pyw
+exit

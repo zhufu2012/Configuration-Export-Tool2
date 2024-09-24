@@ -31,6 +31,11 @@ def close_log():
     with open('log.txt', 'a+', encoding='utf-8') as test:
         test.truncate(0)
 
+##删除文件夹
+def delete_folder(path):
+    if os.path.exists(path) and os.path.isdir(path):
+        shutil.rmtree(path)
+
 
 ##删除文件夹下数据
 def del_file(path):

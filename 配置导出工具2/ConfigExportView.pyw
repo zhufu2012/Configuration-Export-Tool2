@@ -7,6 +7,7 @@ import open_view  ##打开excel表
 import sys, os
 import platform
 
+
 class FileBrowserApp:
     def __init__(self, root):
         ##self.image_path_list = []  ##需要导出图片数据的列表
@@ -34,7 +35,7 @@ class FileBrowserApp:
 
     def refresh_data_types(self):
         # 这个函数将在菜单项被点击时执行
-        DataHandle.RefreshAllData(ConfigData["工具读取的xlsx文件夹路径"])#刷新所有表数据
+        DataHandle.RefreshAllData(ConfigData["工具读取的xlsx文件夹路径"])  # 刷新所有表数据
 
     def create_frames(self):
         # 创建左右两个Frame
@@ -139,26 +140,25 @@ class FileBrowserApp:
 
     ##双击列表框的一项数据
     def on_double_click(self, event):
-        if self.option_var2.get() == 1:## 双击 打开配置
+        if self.option_var2.get() == 1:  ## 双击 打开配置
             selected_indices = app.listbox.curselection()  # 获取选中的项的索引
             if len(selected_indices) == 1:  # 只有当选中一项时才触发操作
                 selected_item = app.listbox.get(selected_indices[0])  # 获取选中的项的文本
-                print("双击项的文字：", self.select_path + "   子表：" + selected_item)
+                ##print("双击项的文字：", self.select_path + "   子表：" + selected_item)
 
                 sub_table_name = selected_item  ##一个子表的名称
                 if selected_item.find("_") != selected_item.rfind("_"):
                     sub_table_name = selected_item[:selected_item.rfind("_")]
                 os.startfile(os.path.abspath(ConfigData["工具导出配置的存放路径"] + sub_table_name + ConfigData["导出的数据后缀"]))
-        else:##双击打开类文件
+        else:  ##双击打开类文件
             selected_indices = app.listbox.curselection()  # 获取选中的项的索引
             if len(selected_indices) == 1:  # 只有当选中一项时才触发操作
                 selected_item = app.listbox.get(selected_indices[0])  # 获取选中的项的文本
                 sub_table_name = selected_item  ##一个子表的名称
                 if selected_item.find("_") != selected_item.rfind("_"):
                     sub_table_name = selected_item[:selected_item.rfind("_")]
-                print(os.path.abspath(ConfigData["工具导出配置类存放路径"] + sub_table_name[4:] + ".cs"))
-                os.startfile(os.path.abspath(ConfigData["工具导出配置类存放路径"] + sub_table_name[4:] + ".cs"))
-
+                ##print(os.path.abspath(ConfigData["工具导出配置基础类路径"] + "/" + sub_table_name[4:] + ".cs"))
+                os.startfile(os.path.abspath(ConfigData["工具导出配置基础类路径"] + "/" + sub_table_name[4:] + ".cs"))
 
     def on_left_click(self, event):
         # 处理鼠标左键点击事件
@@ -168,7 +168,7 @@ class FileBrowserApp:
             self.clear_listbox()
             self.file_label.config(text="")
             self.button_state("disabled")
-            print("导出文件夹下全部配置")
+            ##print("导出文件夹下全部配置")
             self.select_path = self.get_node_path(item)
         else:
             self.file_label.config(text=node_text)
@@ -177,7 +177,7 @@ class FileBrowserApp:
 
             self.select_path = self.get_node_path(item)  # 获取节点路径
             table_name_list, image_path = DataHandle.OneXlsxDataHandle(self.select_path)
-            print(image_path)
+            ##print(image_path)
             self.add_data_to_listbox(table_name_list)
 
     def on_right_click(self, event):
@@ -216,10 +216,10 @@ class FileBrowserApp:
 
     ##导出配置
     def export_all(self):
-        print(self.option_var1.get())
-        DataHandle.AllXlsxDataHandle(ConfigData["工具读取的xlsx文件夹路径"],self.option_var1.get())
+        ##print(self.option_var1.get())
+        DataHandle.AllXlsxDataHandle(ConfigData["工具读取的xlsx文件夹路径"], self.option_var1.get())
         error_text = Config.read_log()
-        #print(error_text)
+        # print(error_text)
         if error_text.find("导出失败") != -1:
             p1 = error_text.find("配置文件:[")
             if p1 != -1:
@@ -227,7 +227,7 @@ class FileBrowserApp:
             self.err_label.config(text=error_text)
         else:
             if error_text.find("导出异常！") != -1:
-                self.err_label.config(text="导出成功！\n但是存在异常！"+error_text)
+                self.err_label.config(text="导出成功！\n但是存在异常！" + error_text)
             else:
                 self.err_label.config(text="导出成功！")
             self.error_table_path = ""
@@ -236,7 +236,7 @@ class FileBrowserApp:
     def export_class(self):
         DataHandle.AllXlsxDataHandleClass(ConfigData["工具读取的xlsx文件夹路径"])
         error_text = Config.read_log()
-        #print(error_text)
+        # print(error_text)
         if error_text.find("导出失败") != -1:
             p1 = error_text.find("导出类失败！配置文件:[")
             if p1 != -1:
@@ -244,7 +244,7 @@ class FileBrowserApp:
             self.err_label.config(text=error_text)
         else:
             if error_text.find("导出异常！") != -1:
-                self.err_label.config(text="导出类成功！\n但是数据存在异常！"+error_text)
+                self.err_label.config(text="导出类成功！\n但是数据存在异常！" + error_text)
             else:
                 self.err_label.config(text="导出类成功！")
             self.error_table_path = ""

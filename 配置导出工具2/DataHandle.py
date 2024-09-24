@@ -6,6 +6,7 @@ import json
 import pandas as pd
 import win32com.client
 import ClassGenerator
+import shutil
 
 isCompact = False  ##False  ##True
 
@@ -187,7 +188,7 @@ def SubTableDataHandle(file_path, table_name, item_list, data_dict, data_key_dic
     if table_name.find("_") != table_name.rfind("_"):
         sub_table_name = table_name[:table_name.rfind("_")]
     if check_key_exist(data_dict, sub_table_name):
-        print(data_dict, sub_table_name)
+        ##print(data_dict, sub_table_name)
         Config.add_log(
             f"导出失败！  配置文件:[{file_path}]  有出现重复的子表，请确保子表名称不会重复！ 表名:{table_name}，错误码:5")
         return None
@@ -228,7 +229,7 @@ def SubTableDataHandle(file_path, table_name, item_list, data_dict, data_key_dic
     return data_dict, data_key_dict, sub_table_name, res_image_path
 
 
-def TableDataHandle(file_path, image_path_list, data_dict, data_key_dict, subtable_name_list):
+def TableDataHandle(file_path, image_path_list, data_dict, data_key_dict, subtable_name_list, subtable_name_list2):
     dicts, image_path = read_xlsx.read_text_all(file_path)
     for table_name, item_list in dicts.items():  ##配置文件的一个子表
         if len(item_list) < 3:
@@ -239,6 +240,7 @@ def TableDataHandle(file_path, image_path_list, data_dict, data_key_dict, subtab
             image_path_list += image_path
             if sub_table_name not in subtable_name_list:
                 subtable_name_list.append(sub_table_name)
+                subtable_name_list2.append(table_name)
             else:  # 子表名已存在
                 Config.add_log(
                     f"导出失败！ 配置文件:[{file_path}]  有出现重复的子表，请确保导出的子表名称不会重复"
@@ -246,7 +248,7 @@ def TableDataHandle(file_path, image_path_list, data_dict, data_key_dict, subtab
                 return None
         else:
             return None
-    return image_path_list, data_dict, data_key_dict, subtable_name_list
+    return image_path_list, data_dict, data_key_dict, subtable_name_list, subtable_name_list2
 
 
 ##对文件路径列表进行检查，导出每一个是.xls或者.xlsx文件的数据
@@ -254,12 +256,14 @@ def data_conver(pathlist):
     image_path_list = []  ##保存存在图片的表，然后在数据导出正确后，再导出图片，防止数据污染
     data_dict = {}  ##所有配置表的数据
     data_key_dict = {}  ##所有配置表的字段数据
-    subtable_name_list = []  ##所有子表名称，检查是否存在重复名称子表
+    subtable_name_list = []  ##所有子表名称，检查是否存在重复名称子表，不带之后的描述文字
+    subtable_name_list2 = []  ##所有子表名称，检查是否存在重复名称子表，带之后的描述文字
     for file_path in pathlist:  ##对每一个配置文件进行处理
         if file_path.find("~$") != -1:
             continue
         if file_path.endswith(".xlsx"):
-            data = TableDataHandle(file_path, image_path_list, data_dict, data_key_dict, subtable_name_list)
+            data = TableDataHandle(file_path, image_path_list, data_dict, data_key_dict, subtable_name_list,
+                                   subtable_name_list2)
             if data is not None:
                 pass
             else:
@@ -268,7 +272,7 @@ def data_conver(pathlist):
         Config.add_log(f"导出失败！ 没有配置可导出！错误码:6")
         return None
     else:
-        return image_path_list, data_dict, data_key_dict, subtable_name_list
+        return image_path_list, data_dict, data_key_dict, subtable_name_list, subtable_name_list2
 
 
 # endregion
@@ -329,18 +333,19 @@ def export_config_file(image_path_list, data_dict, data_key_dict):
 
 
 ##导出配置的类
-def export_config_class(data_dict, data_key_dict):
+def export_config_class(data_dict, data_key_dict, subtable_name_list2):
     ConfigData = Config.load_data()  ##工具配置数据
-    Config.del_file(ConfigData["工具导出配置类路径"])  ##删除原class文件
+    Config.del_file(ConfigData["工具导出配置基础类路径"])  ##删除原class文件
     result_dict = read_xlsx.read_sheet_name()  ##所有xlsx表的每个子表的列名 和 导出选项 和键名称
-    print(result_dict)
-    for table_name, jsonstr in data_dict.items():
+    for table_name, jsonstr in data_dict.items():  ##导出所有配置类
         sheet_data = []
-        for xlsx_path in result_dict:
+        for xlsx_path in result_dict:  ##祝福注释
             if table_name in result_dict[xlsx_path].keys():
                 sheet_data = result_dict[xlsx_path][table_name]
-        if len(sheet_data) == 0:
-            print("空的 data:" + str(sheet_data))
+                break
+
+        ##if len(sheet_data) == 0:
+        ##print("空的 data:" + str(sheet_data))
         data = {"file_name": table_name,
                 "file_path": ConfigData["在项目中读取配置文件所用的路径"] + table_name +
                              ConfigData["导出的数据后缀"],
@@ -348,9 +353,63 @@ def export_config_class(data_dict, data_key_dict):
         generator = ClassGenerator.CSharpClassGenerator(data)
         csharp_code = generator.generate_class(sheet_data)
         # 打开文件进行写入，如果文件不存在则创建文件
-        with open(ConfigData["工具导出配置类存放路径"] + table_name[4:5].upper() + table_name[5:] + ".cs", 'w',
+        with open(ConfigData["工具导出配置基础类路径"] + "/" + table_name[4:5].upper() + table_name[5:] + ".cs", 'w',
                   encoding='utf-8') as file:
             file.write(csharp_code)
+        if ConfigData["导出类是否需要复制到开发路径"]:  ##复制到开发路径
+            Config.delete_folder(ConfigData["工具导出配置基础类复制到项目开发路径"] + "/")
+            class_export_path = ConfigData["工具导出配置基础类路径"] + "/"
+            project_path = ConfigData["工具导出配置基础类复制到项目开发路径"] + "/"
+            shutil.copytree(class_export_path, project_path)
+    if ConfigData["导出类是否需要复制到开发路径"]:  ##复制到开发路径
+        export_config_constant(ConfigData, data_dict.items(), result_dict, subtable_name_list2)  ##导出
+
+
+##提取文件名
+def extract_filename_without_extension(path):
+    filename_with_extension = os.path.basename(path)
+    # 使用 split 或者 rsplit 分割文件名和扩展名
+    filename, extension = os.path.splitext(filename_with_extension)
+    return filename
+
+
+##导出配置类的静态路径类
+def export_config_constant(ConfigData, data_dict, result_dict, subtable_name_list2):
+    # xlsx_name_list = [] ##[(xlsx_name,[table_name1,table_name2])]
+    prefix_str = "namespace Remnant_Afterglow\n{    \n    public partial static class ConfigConstant\n    {\n"
+    suffix_str = "    }\n}"
+    prefix_region_str = "        #region "
+    suffix_region_str = "        #endregion\n"
+    str = ""
+    for xlsx_path in result_dict:  ##祝福注释
+        table_name_list = list(result_dict[xlsx_path].keys())
+        xlsx_name = extract_filename_without_extension(xlsx_path)
+        region_str = xlsx_name + "\n"
+        for table_name in table_name_list:
+            xlsx_dec = ""
+            subtable_names = ""
+            for subtable_name in subtable_name_list2:
+                if (subtable_name.find(table_name) != -1):
+                    if (subtable_name.rfind("_") != subtable_name.find("_")):  # 存在两个以上_
+                        subtable_names = subtable_name
+                        xlsx_dec = subtable_name[subtable_name.rfind("_") + 1:]
+                    break
+            if subtable_names != "":
+                subtable_name_list2.remove(subtable_names)
+            region_str += f'        /// <summary>\n        /// {xlsx_dec}\n        /// </summary>\n'
+            region_str += f'        public const string Config_{get_class_name(table_name)} = \"' + f'{table_name}\";\n'
+        str += prefix_region_str + region_str + suffix_region_str + "        \n        \n"
+    define_str = prefix_str + str + suffix_str  ##静态路径类
+    with open(ConfigData["工具导出配置基础类静态路径类ConfigConstant.cs"], 'w', encoding='utf-8') as file:
+        file.write(define_str)
+    src_file = ConfigData["工具导出配置基础类静态路径类ConfigConstant.cs"]
+    dst_folder = ConfigData["ConfigConstant.cs复制到项目开发路径"]
+    shutil.copy2(src_file, dst_folder)
+
+
+def get_class_name(table_name):
+    return table_name[4:5].upper() + table_name[5:]
+    ##xlsx_name_list.append((xlsx_name,table_name_list))
 
 
 ##对该路径下所有xlsx文件的数据处理后，导出配置
@@ -364,7 +423,7 @@ def AllXlsxDataHandle(path, isCompacts):
     pathlist = get_files_from_directory(path)  ##路径下所有文件数据
     data = data_conver(pathlist)
     if data is not None:
-        (image_path_list, data_dict, data_key_dict, subtable_name_list) = data
+        (image_path_list, data_dict, data_key_dict, subtable_name_list, subtable_name_list2) = data
         ##导出所有配置数据
         export_config_file(image_path_list, data_dict, data_key_dict)
 
@@ -375,9 +434,9 @@ def AllXlsxDataHandleClass(path):
     pathlist = get_files_from_directory(path)  ##路径下所有文件数据
     data = data_conver(pathlist)
     if data is not None:
-        (image_path_list, data_dict, data_key_dict, subtable_name_list) = data
+        (image_path_list, data_dict, data_key_dict, subtable_name_list, subtable_name_list2) = data
         ##导出所有配置数据
-        export_config_class(data_dict, data_key_dict)
+        export_config_class(data_dict, data_key_dict, subtable_name_list2)
 
 
 # 刷新表中的数据类型
@@ -397,7 +456,7 @@ def RefreshAllData(filepath):
 
 def RefreshOneData(path):
     xlapp = win32com.client.DispatchEx("Excel.Application")
-    print(os.path.abspath(path))
+    ##print(os.path.abspath(path))
     wb = xlapp.Workbooks.Open(os.path.abspath(path))
     wb.RefreshAll()
     xlapp.CalculateUntilAsyncQueriesDone()
