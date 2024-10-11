@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 AttrDependency 用于 属性依赖表,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class AttrDependency
     {
         #region 参数及初始化
@@ -33,6 +36,17 @@ namespace Remnant_Afterglow
 			DependencyId = (int)dict["DependencyId"];
 			Target = (int)dict["Target"];
 			Relation = (string)dict["Relation"];
+			InitData();
+        }
+
+        
+        public AttrDependency(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_AttrDependency, cfg_id);//public const string Config_AttrDependency = "cfg_AttrDependency"; 
+			DependencyId = (int)dict["DependencyId"];
+			Target = (int)dict["Target"];
+			Relation = (string)dict["Relation"];
+			InitData();
         }
 
         public AttrDependency(Dictionary<string, object> dict)
@@ -40,6 +54,7 @@ namespace Remnant_Afterglow
 			DependencyId = (int)dict["DependencyId"];
 			Target = (int)dict["Target"];
 			Relation = (string)dict["Relation"];
+			InitData();
         }
         #endregion
     }

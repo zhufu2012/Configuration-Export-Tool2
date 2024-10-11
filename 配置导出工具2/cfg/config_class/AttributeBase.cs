@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 AttributeBase 用于 属性表,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class AttributeBase
     {
         #region 参数及初始化
@@ -26,6 +29,17 @@ namespace Remnant_Afterglow
 			AttributeId = (int)dict["AttributeId"];
 			ShowName = (string)dict["ShowName"];
 			DependencyIdList = (List<int>)dict["DependencyIdList"];
+			InitData();
+        }
+
+        
+        public AttributeBase(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_AttributeBase, cfg_id);//public const string Config_AttributeBase = "cfg_AttributeBase"; 
+			AttributeId = (int)dict["AttributeId"];
+			ShowName = (string)dict["ShowName"];
+			DependencyIdList = (List<int>)dict["DependencyIdList"];
+			InitData();
         }
 
         public AttributeBase(Dictionary<string, object> dict)
@@ -33,6 +47,7 @@ namespace Remnant_Afterglow
 			AttributeId = (int)dict["AttributeId"];
 			ShowName = (string)dict["ShowName"];
 			DependencyIdList = (List<int>)dict["DependencyIdList"];
+			InitData();
         }
         #endregion
     }

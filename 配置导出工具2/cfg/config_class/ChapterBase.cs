@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 ChapterBase 用于 章节基础数据,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class ChapterBase
     {
         #region 参数及初始化
@@ -51,6 +54,22 @@ namespace Remnant_Afterglow
 			BigMapBaseId = (int)dict["BigMapBaseId"];
 			ChapterImage = (Texture2D)dict["ChapterImage"];
 			ChapterStartCopy = (List<int>)dict["ChapterStartCopy"];
+			InitData();
+        }
+
+        
+        public ChapterBase(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_ChapterBase, cfg_id);//public const string Config_ChapterBase = "cfg_ChapterBase"; 
+			ChapterId = (int)dict["ChapterId"];
+			ChapterName = (string)dict["ChapterName"];
+			Describe1 = (string)dict["Describe1"];
+			Describe2 = (string)dict["Describe2"];
+			ChapterType = (int)dict["ChapterType"];
+			BigMapBaseId = (int)dict["BigMapBaseId"];
+			ChapterImage = (Texture2D)dict["ChapterImage"];
+			ChapterStartCopy = (List<int>)dict["ChapterStartCopy"];
+			InitData();
         }
 
         public ChapterBase(Dictionary<string, object> dict)
@@ -63,6 +82,7 @@ namespace Remnant_Afterglow
 			BigMapBaseId = (int)dict["BigMapBaseId"];
 			ChapterImage = (Texture2D)dict["ChapterImage"];
 			ChapterStartCopy = (List<int>)dict["ChapterStartCopy"];
+			InitData();
         }
         #endregion
     }

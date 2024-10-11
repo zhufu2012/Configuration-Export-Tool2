@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 科技树测试 用于 整体测试,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class 科技树测试
     {
         #region 参数及初始化
@@ -63,6 +66,25 @@ namespace Remnant_Afterglow
 			PoaoType = (List<int>)dict["PoaoType"];
 			RGB = (List<short>)dict["RGB"];
 			Resources = (List<List<int>>)dict["Resources"];
+			InitData();
+        }
+
+        
+        public 科技树测试(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_科技树测试, cfg_id);//public const string Config_科技树测试 = "cfg_科技树测试"; 
+			Id = (int)dict["Id"];
+			Id2 = (string)dict["Id2"];
+			Science_Name = (string)dict["Science_Name"];
+			Science_Describe = (string)dict["Science_Describe"];
+			Malleability = (int)dict["Malleability"];
+			Intensity = (float)dict["Intensity"];
+			Intensity2 = (ulong)dict["Intensity2"];
+			Type = (List<List<int>>)dict["Type"];
+			PoaoType = (List<int>)dict["PoaoType"];
+			RGB = (List<short>)dict["RGB"];
+			Resources = (List<List<int>>)dict["Resources"];
+			InitData();
         }
 
         public 科技树测试(Dictionary<string, object> dict)
@@ -78,6 +100,7 @@ namespace Remnant_Afterglow
 			PoaoType = (List<int>)dict["PoaoType"];
 			RGB = (List<short>)dict["RGB"];
 			Resources = (List<List<int>>)dict["Resources"];
+			InitData();
         }
         #endregion
     }

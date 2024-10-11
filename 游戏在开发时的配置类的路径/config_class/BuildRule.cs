@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 BuildRule 用于 建造规则,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class BuildRule
     {
         #region 参数及初始化
@@ -53,6 +56,23 @@ namespace Remnant_Afterglow
 			maxCount = (int)dict["maxCount"];
 			blocksPlacement = (int)dict["blocksPlacement"];
 			cannotPlaceMessage = (int)dict["cannotPlaceMessage"];
+			InitData();
+        }
+
+        
+        public BuildRule(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_BuildRule, cfg_id);//public const string Config_BuildRule = "cfg_BuildRule"; 
+			BuildingID = (int)dict["BuildingID"];
+			BuildingName = (string)dict["BuildingName"];
+			searchTags = (string)dict["searchTags"];
+			searchTeam = (string)dict["searchTeam"];
+			searchDistance = (int)dict["searchDistance"];
+			minCount = (int)dict["minCount"];
+			maxCount = (int)dict["maxCount"];
+			blocksPlacement = (int)dict["blocksPlacement"];
+			cannotPlaceMessage = (int)dict["cannotPlaceMessage"];
+			InitData();
         }
 
         public BuildRule(Dictionary<string, object> dict)
@@ -66,6 +86,7 @@ namespace Remnant_Afterglow
 			maxCount = (int)dict["maxCount"];
 			blocksPlacement = (int)dict["blocksPlacement"];
 			cannotPlaceMessage = (int)dict["cannotPlaceMessage"];
+			InitData();
         }
         #endregion
     }

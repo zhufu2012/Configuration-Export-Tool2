@@ -1,8 +1,111 @@
 {
     "cfg_files": [
         {
+            "file_name": "cfg_ViewBase",
+            "file_path": "./data/config/data/cfg_ViewBase.json",
+            "xlsx_dec": "界面基础配置",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ViewId": "int",
+                "ViewName": "string",
+                "Zindex": "int",
+                "SizeType": "int",
+                "ViewSize": "Vector2",
+                "ViewPos": "Vector2",
+                "BackdropColor": "Color",
+                "BackdropPng": "Texture2D"
+            }
+        },
+        {
+            "file_name": "cfg_UpdateLog",
+            "file_path": "./data/config/data/cfg_UpdateLog.json",
+            "xlsx_dec": "更新日志",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "UpdateLogId": "int",
+                "Time": "string",
+                "NameSize": "int",
+                "NameColor": "Color",
+                "Name": "string",
+                "ContentSize": "int",
+                "ContentColor": "Color",
+                "Content": "string"
+            }
+        },
+        {
+            "file_name": "cfg_AttainmentPage",
+            "file_path": "./data/config/data/cfg_AttainmentPage.json",
+            "xlsx_dec": "数据库成就分页",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "PageId": "int",
+                "PageName": "string"
+            }
+        },
+        {
+            "file_name": "cfg_AttainmentBase",
+            "file_path": "./data/config/data/cfg_AttainmentBase.json",
+            "xlsx_dec": "数据库成就相关配置",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "AttainmentId": "int",
+                "ShowName": "string",
+                "PageId": "int",
+                "UnlockCondList": "List<List<int>>",
+                "Content": "BBCode",
+                "UnlockCondStr": "string"
+            }
+        },
+        {
+            "file_name": "cfg_ScienceRange",
+            "file_path": "./data/config/data/cfg_ScienceRange.json",
+            "xlsx_dec": "科技范围配置",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ScienceRangeId": "int",
+                "ScienceRangeName": "string",
+                "ShowMoneyList": "List<int>",
+                "Offset": "Vector2I",
+                "Interval": "Vector2I",
+                "NodeSize": "Vector2I",
+                "ScienceRangeDes": "string"
+            }
+        },
+        {
+            "file_name": "cfg_ScienceBase",
+            "file_path": "./data/config/data/cfg_ScienceBase.json",
+            "xlsx_dec": "科技基础显示配置",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ScienceId": "int",
+                "ScienceName": "string",
+                "ScienceDes": "string",
+                "ScienceRangeId": "int",
+                "Pos": "Vector2I",
+                "ConnectList": "List<int>",
+                "SciencePng": "Texture2D"
+            }
+        },
+        {
+            "file_name": "cfg_ScienceData",
+            "file_path": "./data/config/data/cfg_ScienceData.json",
+            "xlsx_dec": "科技激活相关数据",
+            "key_list": {
+                "KEY_INDEX": "string",
+                "ScienceId": "int",
+                "ScienceRangeId": "int",
+                "ScienceType": "int",
+                "IsUnlock": "bool",
+                "UnlockCurrList": "List<List<int>>",
+                "MapBuildIDList": "List<int>",
+                "ScienceParam1": "int",
+                "ScienceParamList": "List<List<int>>"
+            }
+        },
+        {
             "file_name": "cfg_ConfigCover",
             "file_path": "./data/config/data/cfg_ConfigCover.json",
+            "xlsx_dec": "配置覆盖关系表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "CoverId": "string",
@@ -15,6 +118,7 @@
         {
             "file_name": "cfg_ConfigCall",
             "file_path": "./data/config/data/cfg_ConfigCall.json",
+            "xlsx_dec": "配置调用关系表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "CallId": "string",
@@ -28,6 +132,7 @@
         {
             "file_name": "cfg_GlobalConfigInt",
             "file_path": "./data/config/data/cfg_GlobalConfigInt.json",
+            "xlsx_dec": "全局配置Int数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Configid": "string",
@@ -38,6 +143,7 @@
         {
             "file_name": "cfg_GlobalConfigStr",
             "file_path": "./data/config/data/cfg_GlobalConfigStr.json",
+            "xlsx_dec": "Str数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Configid": "string",
@@ -48,6 +154,7 @@
         {
             "file_name": "cfg_GlobalConfigFloat",
             "file_path": "./data/config/data/cfg_GlobalConfigFloat.json",
+            "xlsx_dec": "float数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Configid": "string",
@@ -58,6 +165,7 @@
         {
             "file_name": "cfg_GlobalConfigList",
             "file_path": "./data/config/data/cfg_GlobalConfigList.json",
+            "xlsx_dec": "List数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Configid": "string",
@@ -68,6 +176,7 @@
         {
             "file_name": "cfg_FunctionTemplate",
             "file_path": "./data/config/data/cfg_FunctionTemplate.json",
+            "xlsx_dec": "函数模板",
             "key_list": {
                 "KEY_INDEX": "string",
                 "TemplateId": "string",
@@ -83,6 +192,7 @@
         {
             "file_name": "cfg_CameraBase",
             "file_path": "./data/config/data/cfg_CameraBase.json",
+            "xlsx_dec": "相机基本数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "CameraId": "int",
@@ -106,6 +216,7 @@
         {
             "file_name": "cfg_CameraAssembly",
             "file_path": "./data/config/data/cfg_CameraAssembly.json",
+            "xlsx_dec": "相机组件表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "AssemblyId": "int",
@@ -117,6 +228,7 @@
         {
             "file_name": "cfg_SeedType",
             "file_path": "./data/config/data/cfg_SeedType.json",
+            "xlsx_dec": "种子表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "SeedTypeId": "int",
@@ -129,6 +241,7 @@
         {
             "file_name": "cfg_Noise",
             "file_path": "./data/config/data/cfg_Noise.json",
+            "xlsx_dec": "噪声表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "NoiseId": "int",
@@ -157,6 +270,7 @@
         {
             "file_name": "cfg_MapBrushMonster",
             "file_path": "./data/config/data/cfg_MapBrushMonster.json",
+            "xlsx_dec": "噪声表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "MapBrushId": "int",
@@ -174,6 +288,7 @@
         {
             "file_name": "cfg_MapBrushPoint",
             "file_path": "./data/config/data/cfg_MapBrushPoint.json",
+            "xlsx_dec": "噪声表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Map_Brush_Id": "int",
@@ -190,6 +305,7 @@
         {
             "file_name": "cfg_Wave",
             "file_path": "./data/config/data/cfg_Wave.json",
+            "xlsx_dec": "噪声表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Wave_Id": "int",
@@ -204,6 +320,7 @@
         {
             "file_name": "cfg_Enemy",
             "file_path": "./data/config/data/cfg_Enemy.json",
+            "xlsx_dec": "敌人基础配置测试",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Enemy_Id": "int",
@@ -220,6 +337,7 @@
         {
             "file_name": "cfg_TestTowerBase",
             "file_path": "./data/config/data/cfg_TestTowerBase.json",
+            "xlsx_dec": "炮塔基础",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Tower_Id": "int",
@@ -239,6 +357,7 @@
         {
             "file_name": "cfg_TestTowerAttr",
             "file_path": "./data/config/data/cfg_TestTowerAttr.json",
+            "xlsx_dec": "炮塔属性",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Tower_Id": "int",
@@ -249,6 +368,7 @@
         {
             "file_name": "cfg_科技树测试",
             "file_path": "./data/config/data/cfg_科技树测试.json",
+            "xlsx_dec": "整体测试",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Id": "int",
@@ -267,6 +387,7 @@
         {
             "file_name": "cfg_材料基础模板",
             "file_path": "./data/config/data/cfg_材料基础模板.json",
+            "xlsx_dec": "测试",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Item_Id": "int",
@@ -280,6 +401,7 @@
         {
             "file_name": "cfg_材料类型模板",
             "file_path": "./data/config/data/cfg_材料类型模板.json",
+            "xlsx_dec": "测试",
             "key_list": {
                 "KEY_INDEX": "string",
                 "Item_Id": "int",
@@ -290,6 +412,7 @@
         {
             "file_name": "cfg_BulletBase",
             "file_path": "./data/config/data/cfg_BulletBase.json",
+            "xlsx_dec": "子弹基础表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "BulletId": "int",
@@ -302,6 +425,7 @@
         {
             "file_name": "cfg_BaseObjectShow",
             "file_path": "./data/config/data/cfg_BaseObjectShow.json",
+            "xlsx_dec": "实体显示方式表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "ObjectShow": "int",
@@ -312,6 +436,7 @@
         {
             "file_name": "cfg_ObjectBottomBar",
             "file_path": "./data/config/data/cfg_ObjectBottomBar.json",
+            "xlsx_dec": "底部栏",
             "key_list": {
                 "KEY_INDEX": "string",
                 "BottomBarId": "int",
@@ -321,6 +446,7 @@
         {
             "file_name": "cfg_ObjectSideBar",
             "file_path": "./data/config/data/cfg_ObjectSideBar.json",
+            "xlsx_dec": "侧边栏",
             "key_list": {
                 "KEY_INDEX": "string",
                 "SideBarId": "int",
@@ -330,6 +456,7 @@
         {
             "file_name": "cfg_BuildBase",
             "file_path": "./data/config/data/cfg_BuildBase.json",
+            "xlsx_dec": "建筑建筑数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "BuildingID": "int",
@@ -344,6 +471,7 @@
         {
             "file_name": "cfg_BuildRule",
             "file_path": "./data/config/data/cfg_BuildRule.json",
+            "xlsx_dec": "建造规则",
             "key_list": {
                 "KEY_INDEX": "string",
                 "BuildingID": "int",
@@ -360,6 +488,7 @@
         {
             "file_name": "cfg_TowerBase",
             "file_path": "./data/config/data/cfg_TowerBase.json",
+            "xlsx_dec": "炮塔基础表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "TowerId": "int",
@@ -374,6 +503,7 @@
         {
             "file_name": "cfg_AttributeBase",
             "file_path": "./data/config/data/cfg_AttributeBase.json",
+            "xlsx_dec": "属性表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "AttributeId": "int",
@@ -384,6 +514,7 @@
         {
             "file_name": "cfg_AttributeData",
             "file_path": "./data/config/data/cfg_AttributeData.json",
+            "xlsx_dec": "实体属性表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "ObjectType": "int",
@@ -400,6 +531,7 @@
         {
             "file_name": "cfg_AttrCalculate",
             "file_path": "./data/config/data/cfg_AttrCalculate.json",
+            "xlsx_dec": "属性计算表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "CalculateId": "int",
@@ -411,6 +543,7 @@
         {
             "file_name": "cfg_AttrDependency",
             "file_path": "./data/config/data/cfg_AttrDependency.json",
+            "xlsx_dec": "属性依赖表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "DependencyId": "int",
@@ -421,6 +554,7 @@
         {
             "file_name": "cfg_AttrEvent",
             "file_path": "./data/config/data/cfg_AttrEvent.json",
+            "xlsx_dec": "属性事件",
             "key_list": {
                 "KEY_INDEX": "string",
                 "AttrEventId": "int",
@@ -437,6 +571,7 @@
         {
             "file_name": "cfg_GenerateBottomMap",
             "file_path": "./data/config/data/cfg_GenerateBottomMap.json",
+            "xlsx_dec": "随机生成地图方式",
             "key_list": {
                 "KEY_INDEX": "string",
                 "GenerateMapId": "int",
@@ -469,6 +604,7 @@
         {
             "file_name": "cfg_MapMaterial",
             "file_path": "./data/config/data/cfg_MapMaterial.json",
+            "xlsx_dec": "生成地图用材料",
             "key_list": {
                 "KEY_INDEX": "string",
                 "MaterialId": "int",
@@ -482,6 +618,7 @@
         {
             "file_name": "cfg_MapExtraDraw",
             "file_path": "./data/config/data/cfg_MapExtraDraw.json",
+            "xlsx_dec": "地图额外绘制表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "MapDrawId": "int",
@@ -496,6 +633,7 @@
         {
             "file_name": "cfg_GenerateBigStruct",
             "file_path": "./data/config/data/cfg_GenerateBigStruct.json",
+            "xlsx_dec": "地图大型结构",
             "key_list": {
                 "KEY_INDEX": "string",
                 "BigStructId": "int",
@@ -513,6 +651,7 @@
         {
             "file_name": "cfg_GenerateAdornMap",
             "file_path": "./data/config/data/cfg_GenerateAdornMap.json",
+            "xlsx_dec": "装饰绘制层",
             "key_list": {
                 "KEY_INDEX": "string",
                 "AdornMapId": "int",
@@ -525,6 +664,7 @@
         {
             "file_name": "cfg_MapWall",
             "file_path": "./data/config/data/cfg_MapWall.json",
+            "xlsx_dec": "地图墙壁表",
             "key_list": {
                 "KEY_INDEX": "string",
                 "WallId": "int",
@@ -534,6 +674,7 @@
         {
             "file_name": "cfg_ChapterBase",
             "file_path": "./data/config/data/cfg_ChapterBase.json",
+            "xlsx_dec": "章节基础数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "ChapterId": "int",
@@ -549,6 +690,7 @@
         {
             "file_name": "cfg_ChapterCopyBase",
             "file_path": "./data/config/data/cfg_ChapterCopyBase.json",
+            "xlsx_dec": "章节关卡基础数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "ChapterId": "int",
@@ -563,6 +705,7 @@
         {
             "file_name": "cfg_ChapterCopyUI",
             "file_path": "./data/config/data/cfg_ChapterCopyUI.json",
+            "xlsx_dec": "章节关卡UI数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "ChapterId": "int",
@@ -576,6 +719,7 @@
         {
             "file_name": "cfg_ziyuan",
             "file_path": "./data/config/data/cfg_ziyuan.json",
+            "xlsx_dec": "资源",
             "key_list": {
                 "KEY_INDEX": "string",
                 "ItemId": "int",
@@ -588,6 +732,7 @@
         {
             "file_name": "cfg_CampBase",
             "file_path": "./data/config/data/cfg_CampBase.json",
+            "xlsx_dec": "阵营基础数据",
             "key_list": {
                 "KEY_INDEX": "string",
                 "CampId": "int",

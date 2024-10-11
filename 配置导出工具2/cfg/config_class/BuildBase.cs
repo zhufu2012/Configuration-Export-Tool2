@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 BuildBase 用于 建筑建筑数据,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class BuildBase
     {
         #region 参数及初始化
@@ -50,6 +53,21 @@ namespace Remnant_Afterglow
 			BuildingSize = (string)dict["BuildingSize"];
 			BuildingRules = (List<int>)dict["BuildingRules"];
 			BuildPicture = (Texture2D)dict["BuildPicture"];
+			InitData();
+        }
+
+        
+        public BuildBase(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_BuildBase, cfg_id);//public const string Config_BuildBase = "cfg_BuildBase"; 
+			BuildingID = (int)dict["BuildingID"];
+			BuildingName = (string)dict["BuildingName"];
+			ObjectId = (int)dict["ObjectId"];
+			DefaultCamp = (int)dict["DefaultCamp"];
+			BuildingSize = (string)dict["BuildingSize"];
+			BuildingRules = (List<int>)dict["BuildingRules"];
+			BuildPicture = (Texture2D)dict["BuildPicture"];
+			InitData();
         }
 
         public BuildBase(Dictionary<string, object> dict)
@@ -61,6 +79,7 @@ namespace Remnant_Afterglow
 			BuildingSize = (string)dict["BuildingSize"];
 			BuildingRules = (List<int>)dict["BuildingRules"];
 			BuildPicture = (Texture2D)dict["BuildPicture"];
+			InitData();
         }
         #endregion
     }

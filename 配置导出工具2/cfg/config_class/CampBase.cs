@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 CampBase 用于 阵营基础数据,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class CampBase
     {
         #region 参数及初始化
@@ -29,6 +32,18 @@ namespace Remnant_Afterglow
 			CampName = (string)dict["CampName"];
 			CampDes = (string)dict["CampDes"];
 			CopyId = (Texture2D)dict["CopyId"];
+			InitData();
+        }
+
+        
+        public CampBase(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_CampBase, cfg_id);//public const string Config_CampBase = "cfg_CampBase"; 
+			CampId = (int)dict["CampId"];
+			CampName = (string)dict["CampName"];
+			CampDes = (string)dict["CampDes"];
+			CopyId = (Texture2D)dict["CopyId"];
+			InitData();
         }
 
         public CampBase(Dictionary<string, object> dict)
@@ -37,6 +52,7 @@ namespace Remnant_Afterglow
 			CampName = (string)dict["CampName"];
 			CampDes = (string)dict["CampDes"];
 			CopyId = (Texture2D)dict["CopyId"];
+			InitData();
         }
         #endregion
     }

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 ChapterCopyBase 用于 章节关卡基础数据,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class ChapterCopyBase
     {
         #region 参数及初始化
@@ -45,6 +48,21 @@ namespace Remnant_Afterglow
 			Describe2 = (string)dict["Describe2"];
 			GenerateMapId = (int)dict["GenerateMapId"];
 			CopyIdList = (List<int>)dict["CopyIdList"];
+			InitData();
+        }
+
+        
+        public ChapterCopyBase(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_ChapterCopyBase, cfg_id);//public const string Config_ChapterCopyBase = "cfg_ChapterCopyBase"; 
+			ChapterId = (int)dict["ChapterId"];
+			CopyId = (int)dict["CopyId"];
+			CopyName = (string)dict["CopyName"];
+			Describe1 = (string)dict["Describe1"];
+			Describe2 = (string)dict["Describe2"];
+			GenerateMapId = (int)dict["GenerateMapId"];
+			CopyIdList = (List<int>)dict["CopyIdList"];
+			InitData();
         }
 
         public ChapterCopyBase(Dictionary<string, object> dict)
@@ -56,6 +74,7 @@ namespace Remnant_Afterglow
 			Describe2 = (string)dict["Describe2"];
 			GenerateMapId = (int)dict["GenerateMapId"];
 			CopyIdList = (List<int>)dict["CopyIdList"];
+			InitData();
         }
         #endregion
     }

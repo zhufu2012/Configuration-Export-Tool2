@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using File = System.IO.File;
 
 namespace Remnant_Afterglow
@@ -14,6 +15,7 @@ namespace Remnant_Afterglow
     {
         public string file_name { get; set; }
         public string file_path { get; set; }
+        public string xlsx_dec  { get; set; }
         public Dictionary<string, string> key_list { get; set; }
     }
 
@@ -25,8 +27,7 @@ namespace Remnant_Afterglow
             string result = "cinfig Files:\n";
             foreach (var file in cfg_files)
             {
-                result += "文件名称: " + file.file_name + ", 文件路径: " +
-                file.file_path + "\n";
+                result += "配置名称: " + file.file_name + ", 配置路径: " + file.file_path + ", 配置功能：" + file.xlsx_dec + "\n";
             }
             return result;
         }
@@ -48,8 +49,8 @@ namespace Remnant_Afterglow
         }
 
 
-        //异步加载配置  可async
-        private void LoadConfigDataAsync()
+        //异步加载配置
+        private async void LoadConfigDataAsync()
         {
             //await Task.Run(() =>{
 
@@ -69,7 +70,7 @@ namespace Remnant_Afterglow
         //加载基础配置
         public void LoadBaseConfigData()
         {
-            string jsonText = File.ReadAllText(PathConstant.CONFIG_PATH_USER);
+            string jsonText = File.ReadAllText(PathConstant.GetPathUser(PathConstant.CONFIG_PATH_USER));
             ConfigFiles file_data = JsonConvert.DeserializeObject<ConfigFiles>(jsonText);
             filedata = file_data.cfg_files;
             //List<ForMatStr> format_str_list = new List<ForMatStr>();
@@ -146,6 +147,29 @@ namespace Remnant_Afterglow
         public static Dictionary<string, object> GetCfgIndex(string fileName, int Index)
         {
             string index = "" + Index;
+            return config_dict.ContainsKey(fileName) &&
+            config_dict[fileName].ContainsKey(index) ?
+            config_dict[fileName][index] : null;
+        }
+
+        /// <summary>
+        /// 读取某配置 某一行的数据
+        /// </summary>
+        /// <param name="fileName">配置名称</param>
+        /// <param name="Key">键</param>
+        /// <returns></returns>
+        public static Dictionary<string, object> GetCfgIndex(string fileName, params object[] IndexArray)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < IndexArray.Length; i++)
+            {
+                sb.Append(IndexArray[i].ToString());
+                if (i < IndexArray.Length - 1)
+                {
+                    sb.Append('_');
+                }
+            }
+            string index = sb.ToString();
             return config_dict.ContainsKey(fileName) &&
             config_dict[fileName].ContainsKey(index) ?
             config_dict[fileName][index] : null;
@@ -239,6 +263,34 @@ namespace Remnant_Afterglow
                         poslist.Add(new Vector2(list5[0], list5[1]));
                     }
                     return poslist;
+                case "List<Vector2I>"://坐标列表
+                    List<List<int>> list8 = value.ToObject<List<List<int>>>();
+                    List<Vector2I> veslist = new List<Vector2I>();
+                    for (int i = 0; i < list8.Count; i++)
+                    {
+                        List<int> list9 = list8[i];
+                        veslist.Add(new Vector2I(list9[0], list9[1]));
+                    }
+                    return veslist;
+                case "Color"://RGB颜色
+                    List<int> list6 = value.ToObject<List<int>>();
+                    float r = (float)list6[0] / 256;
+                    float g = (float)list6[1] / 256;
+                    float b = (float)list6[2] / 256;
+                    if (list6.Count == 3)
+                        return new Color(r, g, b);
+                    else
+                    {
+                        float a = (float)list6[3] / 256;
+                        return new Color(r, g, b, a);
+                    }
+                case "SequenceMapType":
+                    string SequenceMapStr = value.Value<string>();
+                    var file = FileAccess.Open(PathConstant.GetPathUser(PathConstant.SequenceMap_PATH_USER) + SequenceMapStr + ".json", FileAccess.ModeFlags.Read);
+                    SequenceMapType root = JsonConvert.DeserializeObject<SequenceMapType>(file.GetAsText());
+                    root.meta.InitMetaData();
+                    root.InitSequenceMap();
+                    return root;
                 case "ulong":
                     return value.Value<ulong>();
                 case "bool":

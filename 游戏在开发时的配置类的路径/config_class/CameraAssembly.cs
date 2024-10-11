@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 CameraAssembly 用于 相机组件表,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class CameraAssembly
     {
         #region 参数及初始化
@@ -32,6 +35,18 @@ namespace Remnant_Afterglow
 			Type = (int)dict["Type"];
 			Pparam = (int)dict["Pparam"];
 			Offset = (Vector2)dict["Offset"];
+			InitData();
+        }
+
+        
+        public CameraAssembly(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_CameraAssembly, cfg_id);//public const string Config_CameraAssembly = "cfg_CameraAssembly"; 
+			AssemblyId = (int)dict["AssemblyId"];
+			Type = (int)dict["Type"];
+			Pparam = (int)dict["Pparam"];
+			Offset = (Vector2)dict["Offset"];
+			InitData();
         }
 
         public CameraAssembly(Dictionary<string, object> dict)
@@ -40,6 +55,7 @@ namespace Remnant_Afterglow
 			Type = (int)dict["Type"];
 			Pparam = (int)dict["Pparam"];
 			Offset = (Vector2)dict["Offset"];
+			InitData();
         }
         #endregion
     }

@@ -7,8 +7,10 @@ import pandas as pd
 import win32com.client
 import ClassGenerator
 import shutil
+import ClassExport
 
 isCompact = False  ##False  ##True
+ConfigData = Config.load_data()  ##工具配置数据
 
 
 # region  数据处理部分
@@ -109,7 +111,7 @@ def GetExportLine(item_list):
             export_list.append(line)
             break
         else:
-            break
+            continue
 
     return export_list
 
@@ -299,9 +301,8 @@ def get_files_from_directory(directory):
 
 
 ##导出配置数据到文件
-def export_config_file(image_path_list, data_dict, data_key_dict):
+def export_config_file(image_path_list, data_dict, data_key_dict, subtable_name_list2):
     languages_table_name = []
-    ConfigData = Config.load_data()  ##工具配置数据
     Config.del_file(ConfigData["工具导出配置的存放路径"])  ##删除原基础配置
     Config.del_file(ConfigData["工具导出图片的存放路径"])  ##删除原图片资源
     new_image_path_list = []
@@ -316,9 +317,19 @@ def export_config_file(image_path_list, data_dict, data_key_dict):
         with open(ConfigData["工具导出配置的存放路径"] + table_name + ConfigData["导出的数据后缀"], 'w',
                   encoding='utf-8') as file:
             file.write(jsonstr)
+        subtable_names = ""
+        for subtable_name in subtable_name_list2:
+            if subtable_name.find(table_name) != -1:
+                if subtable_name.count("_") > 1:  # 存在两个以上_
+                    subtable_names = subtable_name
+                    xlsx_dec = subtable_name[subtable_name.rfind("_") + 1:]
+                break
+        if subtable_names != "":
+            subtable_name_list2.remove(subtable_names)
         languages_table_name.append({"file_name": table_name,
                                      "file_path": ConfigData["在项目中读取配置文件所用的路径"] + table_name +
                                                   ConfigData["导出的数据后缀"],
+                                     "xlsx_dec" : xlsx_dec,
                                      "key_list": data_key_dict[table_name]})
     ##生成基础配置文件
     if isCompact:
@@ -334,82 +345,71 @@ def export_config_file(image_path_list, data_dict, data_key_dict):
 
 ##导出配置的类
 def export_config_class(data_dict, data_key_dict, subtable_name_list2):
-    ConfigData = Config.load_data()  ##工具配置数据
-    Config.del_file(ConfigData["工具导出配置基础类路径"])  ##删除原class文件
     result_dict = read_xlsx.read_sheet_name()  ##所有xlsx表的每个子表的列名 和 导出选项 和键名称
+    export_class1(result_dict, data_dict, data_key_dict, subtable_name_list2)
+    export_class2(result_dict, data_dict, data_key_dict, subtable_name_list2)
+    if ConfigData["导出类是否需要复制到开发路径"]:  ##复制到开发路径
+        ClassExport.export_config_constant(ConfigData, data_dict.items(), result_dict, subtable_name_list2)  ##导出
+    if ConfigData["是否导出类的缓存代码"]:  ##复制到开发路径
+        ClassExport.export_ConfigCache(ConfigData, data_dict.items(), result_dict, subtable_name_list2)  ##导出
+
+
+##导出基础类到基础类路径
+def export_class1(result_dict, data_dict, data_key_dict, subtable_name_list2):
+    Config.del_file(ConfigData["工具导出配置基础类路径"])  ##删除原class文件
     for table_name, jsonstr in data_dict.items():  ##导出所有配置类
+        if table_name in ConfigData["不自动生成配置类的配置表"]:
+            continue
         sheet_data = []
-        for xlsx_path in result_dict:  ##祝福注释
+        for xlsx_path in result_dict:
             if table_name in result_dict[xlsx_path].keys():
                 sheet_data = result_dict[xlsx_path][table_name]
                 break
-
-        ##if len(sheet_data) == 0:
-        ##print("空的 data:" + str(sheet_data))
         data = {"file_name": table_name,
                 "file_path": ConfigData["在项目中读取配置文件所用的路径"] + table_name +
                              ConfigData["导出的数据后缀"],
                 "key_list": data_key_dict[table_name]}
-        generator = ClassGenerator.CSharpClassGenerator(data)
-        csharp_code = generator.generate_class(sheet_data)
+        generator = ClassGenerator.CSharpClassGenerator(data, ConfigData)
+        csharp_code = generator.generate_class(sheet_data, subtable_name_list2)
         # 打开文件进行写入，如果文件不存在则创建文件
         with open(ConfigData["工具导出配置基础类路径"] + "/" + table_name[4:5].upper() + table_name[5:] + ".cs", 'w',
                   encoding='utf-8') as file:
             file.write(csharp_code)
         if ConfigData["导出类是否需要复制到开发路径"]:  ##复制到开发路径
-            Config.delete_folder(ConfigData["工具导出配置基础类复制到项目开发路径"] + "/")
-            class_export_path = ConfigData["工具导出配置基础类路径"] + "/"
-            project_path = ConfigData["工具导出配置基础类复制到项目开发路径"] + "/"
+            project_path = ConfigData["工具导出配置基础类复制到项目开发路径"]
+            Config.delete_folder(project_path)
+            class_export_path = ConfigData["工具导出配置基础类路径"]
             shutil.copytree(class_export_path, project_path)
-    if ConfigData["导出类是否需要复制到开发路径"]:  ##复制到开发路径
-        export_config_constant(ConfigData, data_dict.items(), result_dict, subtable_name_list2)  ##导出
 
 
-##提取文件名
-def extract_filename_without_extension(path):
-    filename_with_extension = os.path.basename(path)
-    # 使用 split 或者 rsplit 分割文件名和扩展名
-    filename, extension = os.path.splitext(filename_with_extension)
-    return filename
+##导出基础类2到基础类路径
+def export_class2(result_dict, data_dict, data_key_dict, subtable_name_list2):
+    Config.del_file(ConfigData["工具导出配置基础类2路径"])  ##删除原class文件
+    for table_name, jsonstr in data_dict.items():  ##导出所有配置类
+        if table_name in ConfigData["不自动生成配置类的配置表"]:
+            continue
+        sheet_data = []
+        for xlsx_path in result_dict:
+            if table_name in result_dict[xlsx_path].keys():
+                sheet_data = result_dict[xlsx_path][table_name]
+                break
+        data = {"file_name": table_name,
+                "file_path": ConfigData["在项目中读取配置文件所用的路径"] + table_name +
+                             ConfigData["导出的数据后缀"],
+                "key_list": data_key_dict[table_name]}
+        generator = ClassGenerator.CSharpClassGenerator(data, ConfigData)
+        csharp_code = generator.generate_class2(subtable_name_list2)
+        # 打开文件进行写入，如果文件不存在则创建文件
+        with open(ConfigData["工具导出配置基础类2路径"] + "/" + table_name[4:5].upper() + table_name[5:] + ".cs", 'w',
+                  encoding='utf-8') as file:
+            file.write(csharp_code)
+        if ConfigData["导出类是否需要复制到开发路径"]:  ##复制到开发路径
+            project_path = ConfigData["工具导出配置基础类2复制到项目开发路径"]
+            Config.del_file2(project_path, ConfigData["不自动覆盖的配置表2"])
+            class_export_path = ConfigData["工具导出配置基础类2路径"]
 
+            Config.copy_dir2(class_export_path, project_path, ConfigData["不自动覆盖的配置表2"])
 
-##导出配置类的静态路径类
-def export_config_constant(ConfigData, data_dict, result_dict, subtable_name_list2):
-    # xlsx_name_list = [] ##[(xlsx_name,[table_name1,table_name2])]
-    prefix_str = "namespace Remnant_Afterglow\n{    \n    public partial static class ConfigConstant\n    {\n"
-    suffix_str = "    }\n}"
-    prefix_region_str = "        #region "
-    suffix_region_str = "        #endregion\n"
-    str = ""
-    for xlsx_path in result_dict:  ##祝福注释
-        table_name_list = list(result_dict[xlsx_path].keys())
-        xlsx_name = extract_filename_without_extension(xlsx_path)
-        region_str = xlsx_name + "\n"
-        for table_name in table_name_list:
-            xlsx_dec = ""
-            subtable_names = ""
-            for subtable_name in subtable_name_list2:
-                if (subtable_name.find(table_name) != -1):
-                    if (subtable_name.rfind("_") != subtable_name.find("_")):  # 存在两个以上_
-                        subtable_names = subtable_name
-                        xlsx_dec = subtable_name[subtable_name.rfind("_") + 1:]
-                    break
-            if subtable_names != "":
-                subtable_name_list2.remove(subtable_names)
-            region_str += f'        /// <summary>\n        /// {xlsx_dec}\n        /// </summary>\n'
-            region_str += f'        public const string Config_{get_class_name(table_name)} = \"' + f'{table_name}\";\n'
-        str += prefix_region_str + region_str + suffix_region_str + "        \n        \n"
-    define_str = prefix_str + str + suffix_str  ##静态路径类
-    with open(ConfigData["工具导出配置基础类静态路径类ConfigConstant.cs"], 'w', encoding='utf-8') as file:
-        file.write(define_str)
-    src_file = ConfigData["工具导出配置基础类静态路径类ConfigConstant.cs"]
-    dst_folder = ConfigData["ConfigConstant.cs复制到项目开发路径"]
-    shutil.copy2(src_file, dst_folder)
-
-
-def get_class_name(table_name):
-    return table_name[4:5].upper() + table_name[5:]
-    ##xlsx_name_list.append((xlsx_name,table_name_list))
 
 
 ##对该路径下所有xlsx文件的数据处理后，导出配置
@@ -425,7 +425,7 @@ def AllXlsxDataHandle(path, isCompacts):
     if data is not None:
         (image_path_list, data_dict, data_key_dict, subtable_name_list, subtable_name_list2) = data
         ##导出所有配置数据
-        export_config_file(image_path_list, data_dict, data_key_dict)
+        export_config_file(image_path_list, data_dict, data_key_dict,subtable_name_list2)
 
 
 ##对该路径下所有xlsx文件的数据处理后，导出为Class

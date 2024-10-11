@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 AttrCalculate 用于 属性计算表,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class AttrCalculate
     {
         #region 参数及初始化
@@ -41,6 +44,18 @@ namespace Remnant_Afterglow
 			CalculateType = (int)dict["CalculateType"];
 			Priority = (List<int>)dict["Priority"];
 			Relation = (string)dict["Relation"];
+			InitData();
+        }
+
+        
+        public AttrCalculate(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_AttrCalculate, cfg_id);//public const string Config_AttrCalculate = "cfg_AttrCalculate"; 
+			CalculateId = (int)dict["CalculateId"];
+			CalculateType = (int)dict["CalculateType"];
+			Priority = (List<int>)dict["Priority"];
+			Relation = (string)dict["Relation"];
+			InitData();
         }
 
         public AttrCalculate(Dictionary<string, object> dict)
@@ -49,6 +64,7 @@ namespace Remnant_Afterglow
 			CalculateType = (int)dict["CalculateType"];
 			Priority = (List<int>)dict["Priority"];
 			Relation = (string)dict["Relation"];
+			InitData();
         }
         #endregion
     }

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 GenerateBigStruct 用于 地图大型结构,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class GenerateBigStruct
     {
         #region 参数及初始化
@@ -70,6 +73,24 @@ namespace Remnant_Afterglow
 			Seed = (int)dict["Seed"];
 			Probability = (float)dict["Probability"];
 			PosList = (List<List<int>>)dict["PosList"];
+			InitData();
+        }
+
+        
+        public GenerateBigStruct(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_GenerateBigStruct, cfg_id);//public const string Config_GenerateBigStruct = "cfg_GenerateBigStruct"; 
+			BigStructId = (int)dict["BigStructId"];
+			BigStructName = (string)dict["BigStructName"];
+			Layer = (int)dict["Layer"];
+			Size = (List<int>)dict["Size"];
+			StructList = (List<List<int>>)dict["StructList"];
+			GeneratBigType = (int)dict["GeneratBigType"];
+			IsUserSeed = (bool)dict["IsUserSeed"];
+			Seed = (int)dict["Seed"];
+			Probability = (float)dict["Probability"];
+			PosList = (List<List<int>>)dict["PosList"];
+			InitData();
         }
 
         public GenerateBigStruct(Dictionary<string, object> dict)
@@ -84,6 +105,7 @@ namespace Remnant_Afterglow
 			Seed = (int)dict["Seed"];
 			Probability = (float)dict["Probability"];
 			PosList = (List<List<int>>)dict["PosList"];
+			InitData();
         }
         #endregion
     }

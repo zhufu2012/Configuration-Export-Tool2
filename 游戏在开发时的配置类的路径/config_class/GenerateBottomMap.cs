@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 GenerateBottomMap 用于 随机生成地图方式,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class GenerateBottomMap
     {
         #region 参数及初始化
@@ -174,6 +177,39 @@ namespace Remnant_Afterglow
 			IsDrawPass = (bool)dict["IsDrawPass"];
 			PassMaterialId = (int)dict["PassMaterialId"];
 			PassWidth = (int)dict["PassWidth"];
+			InitData();
+        }
+
+        
+        public GenerateBottomMap(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_GenerateBottomMap, cfg_id);//public const string Config_GenerateBottomMap = "cfg_GenerateBottomMap"; 
+			GenerateMapId = (int)dict["GenerateMapId"];
+			GenerateMapName = (string)dict["GenerateMapName"];
+			CameraId = (int)dict["CameraId"];
+			Width = (int)dict["Width"];
+			Height = (int)dict["Height"];
+			IsNeedWall = (bool)dict["IsNeedWall"];
+			WallThickness = (int)dict["WallThickness"];
+			DefaultMaterialId = (int)dict["DefaultMaterialId"];
+			WallMaterialId = (int)dict["WallMaterialId"];
+			WallImageId = (int)dict["WallImageId"];
+			IsUseNoiseEdit = (bool)dict["IsUseNoiseEdit"];
+			SeedTypeId = (int)dict["SeedTypeId"];
+			IsDensityContrary = (bool)dict["IsDensityContrary"];
+			Density = (int)dict["Density"];
+			WallParamList = (List<List<int>>)dict["WallParamList"];
+			AdornLayerIdList = (List<int>)dict["AdornLayerIdList"];
+			ExtraDrawIdList = (List<int>)dict["ExtraDrawIdList"];
+			BigStructIdList = (List<int>)dict["BigStructIdList"];
+			IsClearWall = (bool)dict["IsClearWall"];
+			IsClearDefine = (bool)dict["IsClearDefine"];
+			MinWallMeasure = (int)dict["MinWallMeasure"];
+			MinDefineMeasure = (int)dict["MinDefineMeasure"];
+			IsDrawPass = (bool)dict["IsDrawPass"];
+			PassMaterialId = (int)dict["PassMaterialId"];
+			PassWidth = (int)dict["PassWidth"];
+			InitData();
         }
 
         public GenerateBottomMap(Dictionary<string, object> dict)
@@ -203,6 +239,7 @@ namespace Remnant_Afterglow
 			IsDrawPass = (bool)dict["IsDrawPass"];
 			PassMaterialId = (int)dict["PassMaterialId"];
 			PassWidth = (int)dict["PassWidth"];
+			InitData();
         }
         #endregion
     }

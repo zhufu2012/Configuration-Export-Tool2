@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 AttributeData 用于 实体属性表,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class AttributeData
     {
         #region 参数及初始化
@@ -65,6 +68,23 @@ namespace Remnant_Afterglow
 			Regen = (float)dict["Regen"];
 			RegenFps = (float)dict["RegenFps"];
 			AttrEventIdList = (List<List<int>>)dict["AttrEventIdList"];
+			InitData();
+        }
+
+        
+        public AttributeData(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_AttributeData, cfg_id);//public const string Config_AttributeData = "cfg_AttributeData"; 
+			ObjectType = (int)dict["ObjectType"];
+			ObjectId = (int)dict["ObjectId"];
+			AttributeId = (int)dict["AttributeId"];
+			StartValue = (float)dict["StartValue"];
+			Max = (float)dict["Max"];
+			Min = (float)dict["Min"];
+			Regen = (float)dict["Regen"];
+			RegenFps = (float)dict["RegenFps"];
+			AttrEventIdList = (List<List<int>>)dict["AttrEventIdList"];
+			InitData();
         }
 
         public AttributeData(Dictionary<string, object> dict)
@@ -78,6 +98,7 @@ namespace Remnant_Afterglow
 			Regen = (float)dict["Regen"];
 			RegenFps = (float)dict["RegenFps"];
 			AttrEventIdList = (List<List<int>>)dict["AttrEventIdList"];
+			InitData();
         }
         #endregion
     }

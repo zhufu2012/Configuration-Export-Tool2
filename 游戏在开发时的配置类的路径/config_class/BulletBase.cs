@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 BulletBase 用于 子弹基础表,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class BulletBase
     {
         #region 参数及初始化
@@ -36,6 +39,19 @@ namespace Remnant_Afterglow
 			ObjectId = (int)dict["ObjectId"];
 			BulletSize = (int)dict["BulletSize"];
 			BulletPng = (Texture2D)dict["BulletPng"];
+			InitData();
+        }
+
+        
+        public BulletBase(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_BulletBase, cfg_id);//public const string Config_BulletBase = "cfg_BulletBase"; 
+			BulletId = (int)dict["BulletId"];
+			BulletName = (string)dict["BulletName"];
+			ObjectId = (int)dict["ObjectId"];
+			BulletSize = (int)dict["BulletSize"];
+			BulletPng = (Texture2D)dict["BulletPng"];
+			InitData();
         }
 
         public BulletBase(Dictionary<string, object> dict)
@@ -45,6 +61,7 @@ namespace Remnant_Afterglow
 			ObjectId = (int)dict["ObjectId"];
 			BulletSize = (int)dict["BulletSize"];
 			BulletPng = (Texture2D)dict["BulletPng"];
+			InitData();
         }
         #endregion
     }

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 FunctionTemplate 用于 函数模板,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class FunctionTemplate
     {
         #region 参数及初始化
@@ -51,6 +54,22 @@ namespace Remnant_Afterglow
 			CodeVariable = (string)dict["CodeVariable"];
 			CodeReturn = (string)dict["CodeReturn"];
 			VariableType = (string)dict["VariableType"];
+			InitData();
+        }
+
+        
+        public FunctionTemplate(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_FunctionTemplate, cfg_id);//public const string Config_FunctionTemplate = "cfg_FunctionTemplate"; 
+			TemplateId = (string)dict["TemplateId"];
+			TableName = (string)dict["TableName"];
+			TableKey = (string)dict["TableKey"];
+			TableField = (string)dict["TableField"];
+			CodePack = (string)dict["CodePack"];
+			CodeVariable = (string)dict["CodeVariable"];
+			CodeReturn = (string)dict["CodeReturn"];
+			VariableType = (string)dict["VariableType"];
+			InitData();
         }
 
         public FunctionTemplate(Dictionary<string, object> dict)
@@ -63,6 +82,7 @@ namespace Remnant_Afterglow
 			CodeVariable = (string)dict["CodeVariable"];
 			CodeReturn = (string)dict["CodeReturn"];
 			VariableType = (string)dict["VariableType"];
+			InitData();
         }
         #endregion
     }

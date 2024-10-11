@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 TowerBase 用于 炮塔基础,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class TowerBase
     {
         #region 参数及初始化
@@ -50,6 +53,21 @@ namespace Remnant_Afterglow
 			TowerSize = (List<int>)dict["TowerSize"];
 			TowerBasePng = (Texture2D)dict["TowerBasePng"];
 			TowerWeaponPng = (Texture2D)dict["TowerWeaponPng"];
+			InitData();
+        }
+
+        
+        public TowerBase(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_TowerBase, cfg_id);//public const string Config_TowerBase = "cfg_TowerBase"; 
+			TowerId = (int)dict["TowerId"];
+			TowerName = (string)dict["TowerName"];
+			ObjectId = (int)dict["ObjectId"];
+			CampId = (int)dict["CampId"];
+			TowerSize = (List<int>)dict["TowerSize"];
+			TowerBasePng = (Texture2D)dict["TowerBasePng"];
+			TowerWeaponPng = (Texture2D)dict["TowerWeaponPng"];
+			InitData();
         }
 
         public TowerBase(Dictionary<string, object> dict)
@@ -61,6 +79,7 @@ namespace Remnant_Afterglow
 			TowerSize = (List<int>)dict["TowerSize"];
 			TowerBasePng = (Texture2D)dict["TowerBasePng"];
 			TowerWeaponPng = (Texture2D)dict["TowerWeaponPng"];
+			InitData();
         }
         #endregion
     }

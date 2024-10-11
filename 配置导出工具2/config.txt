@@ -7,28 +7,74 @@
 	
 	
     "导出类是否需要复制到开发路径": true,
-    "工具导出配置基础类路径": "cfg/config_class",
-    "工具导出配置基础类复制到项目开发路径": "../游戏在开发时的配置类的路径/config_class",
+    "工具导出配置基础类路径": "cfg/config_class/",
+	"工具导出配置基础类2路径": "cfg/config_class2/",
+	
+    "工具导出配置基础类复制到项目开发路径": "../游戏在开发时的配置类的路径/config_class/",
+	"工具导出配置基础类2复制到项目开发路径": "../游戏在开发时的配置类的路径/config_class2/",
     "工具导出配置基础类静态路径类ConfigConstant.cs": "cfg/ConfigConstant.cs",
     "ConfigConstant.cs复制到项目开发路径": "../游戏在开发时的配置类的路径/",
 	
 	"在项目中读取配置文件所用的路径" : "./data/config/data/",
     "在项目中读取PNG资源所用的路径" : "./data/config/images/",
-	"复制时删除开发路径" : "../游戏在开发时的配置路径/config/",
 	
-    "配置文件复制到项目开发路径" : "../游戏在开发时的配置路径/config/data/",
-    "PNG资源复制到项目开发路径" : "../游戏在开发时的配置路径/config/images/",
-    "flie_name.json复制到项目开发路径" : "../游戏在开发时的配置路径/config/",
-
-
-    "复制时删除测试路径" : "../游戏在测试时的配置路径/config/",
-    "配置文件复制到项目测试路径" : "../游戏在测试时的配置路径/config/data/",
-    "PNG资源复制到项目测试路径" : "../游戏在测试时的配置路径/config/images/",
-    "flie_name.json复制到项目测试路径" : "../游戏在测试时的配置路径/config/",
+	"复制配置数据列表-描述":["复制时要删除的路径","配置文件复制到对应路径",
+		"PNG资源复制到对应路径","flie_name.json复制到对应路径"],
+	"复制配置数据列表" : 
+	{
+		"开发路径":["../游戏在开发时的配置路径/config/",
+		"../游戏在开发时的配置路径/config/data/",
+		"../游戏在开发时的配置路径/config/images/",
+		"../游戏在开发时的配置路径/config/"],
+		
+		"测试路径":["../游戏在测试时的配置路径/config/",
+		"../游戏在测试时的配置路径/config/data/",
+		"../游戏在测试时的配置路径/config/images/",
+		"../游戏在测试时的配置路径/config/"]
+	},
 	
-	"默认开头添加的库名" : "using System.Collections.Generic;\n",
-    "导出类型对应库名称" : {
+	
+    "默认开头添加的库名": "using System.Collections.Generic;\n",
+	"类2默认开头添加的库名": "",
+	"导出类的命名空间" : "Remnant_Afterglow",
+	"特殊的导出类型,需要替换" : {
+		"SequenceMapType" : "SequenceMapType",
+		"BBCode" : "string"
+    },
+    "不自动生成配置类的配置表": [
+        "cfg_BigMapCell",
+		"cfg_Noise",
+		"cfg_SeedType",
+		"cfg_GenerateAdornMap",
+		"cfg_MapImageSet",
+		"cfg_AttrEvent"
+    ],
+    "不自动覆盖的配置表2": [
+		"AttributeTemplate",
+		"AttributeData",
+		"CampBase"
+    ],
+    "导出类型对应库名称": {
         "Texture2D": "using Godot;\n",
-		"Vector2": "using Godot;\n"
-    }
+        "Vector2": "using Godot;\n",
+        "Vector2I": "using Godot;\n",
+		"Color": "using Godot;\n"
+    },
+	
+	
+	
+	
+	
+	
+	"是否导出类的缓存代码": true,
+	"工具导出配置基础缓存类ConfigCache": "cfg/ConfigCache.cs",
+	"ConfigCache.cs复制到项目开发路径": "../游戏在开发时的配置类的路径/ConfigCache.cs",
+	"不自动生成基础缓存的配置表": [
+		"cfg_BigMapCell",
+		"cfg_Noise",
+		"cfg_SeedType",
+		"cfg_GenerateAdornMap",
+		"cfg_MapImageSet",
+		"cfg_AttrEvent"
+    ]
 }

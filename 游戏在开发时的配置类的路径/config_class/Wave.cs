@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 Wave 用于 ,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class Wave
     {
         #region 参数及初始化
@@ -49,6 +52,21 @@ namespace Remnant_Afterglow
 			Wave_Type = (int)dict["Wave_Type"];
 			Wave_Time = (int)dict["Wave_Time"];
 			Wave_After_Time = (int)dict["Wave_After_Time"];
+			InitData();
+        }
+
+        
+        public Wave(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_Wave, cfg_id);//public const string Config_Wave = "cfg_Wave"; 
+			Wave_Id = (int)dict["Wave_Id"];
+			Wave_Name = (string)dict["Wave_Name"];
+			Wave_Describe = (string)dict["Wave_Describe"];
+			Wave_Data = (List<List<int>>)dict["Wave_Data"];
+			Wave_Type = (int)dict["Wave_Type"];
+			Wave_Time = (int)dict["Wave_Time"];
+			Wave_After_Time = (int)dict["Wave_After_Time"];
+			InitData();
         }
 
         public Wave(Dictionary<string, object> dict)
@@ -60,6 +78,7 @@ namespace Remnant_Afterglow
 			Wave_Type = (int)dict["Wave_Type"];
 			Wave_Time = (int)dict["Wave_Time"];
 			Wave_After_Time = (int)dict["Wave_After_Time"];
+			InitData();
         }
         #endregion
     }

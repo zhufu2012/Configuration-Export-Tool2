@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 MapBrushMonster 用于 ,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class MapBrushMonster
     {
         #region 参数及初始化
@@ -63,6 +66,24 @@ namespace Remnant_Afterglow
 			M_AttributeId_List = (List<int>)dict["M_AttributeId_List"];
 			E_AttributeId_List = (List<int>)dict["E_AttributeId_List"];
 			Pass_Condition = (List<List<int>>)dict["Pass_Condition"];
+			InitData();
+        }
+
+        
+        public MapBrushMonster(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_MapBrushMonster, cfg_id);//public const string Config_MapBrushMonster = "cfg_MapBrushMonster"; 
+			MapBrushId = (int)dict["MapBrushId"];
+			MapName = (string)dict["MapName"];
+			MapBaseDescribe = (string)dict["MapBaseDescribe"];
+			BornPoint = (Vector2)dict["BornPoint"];
+			CameraBaseCfg = (List<float>)dict["CameraBaseCfg"];
+			CameraCfg = (List<float>)dict["CameraCfg"];
+			BrushId_List = (List<int>)dict["BrushId_List"];
+			M_AttributeId_List = (List<int>)dict["M_AttributeId_List"];
+			E_AttributeId_List = (List<int>)dict["E_AttributeId_List"];
+			Pass_Condition = (List<List<int>>)dict["Pass_Condition"];
+			InitData();
         }
 
         public MapBrushMonster(Dictionary<string, object> dict)
@@ -77,6 +98,7 @@ namespace Remnant_Afterglow
 			M_AttributeId_List = (List<int>)dict["M_AttributeId_List"];
 			E_AttributeId_List = (List<int>)dict["E_AttributeId_List"];
 			Pass_Condition = (List<List<int>>)dict["Pass_Condition"];
+			InitData();
         }
         #endregion
     }

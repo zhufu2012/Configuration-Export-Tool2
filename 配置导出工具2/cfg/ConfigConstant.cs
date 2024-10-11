@@ -1,7 +1,52 @@
 namespace Remnant_Afterglow
 {    
-    public partial static class ConfigConstant
+    //自动生成的静态类，用于管理配置的路径，请不要手动修改
+    public partial class ConfigConstant
     {
+        #region Ui界面配置
+        /// <summary>
+        /// 界面基础配置
+        /// </summary>
+        public const string Config_ViewBase = "cfg_ViewBase";
+        #endregion
+        
+        
+        #region 主界面更新日志
+        /// <summary>
+        /// 更新日志
+        /// </summary>
+        public const string Config_UpdateLog = "cfg_UpdateLog";
+        #endregion
+        
+        
+        #region 数据库界面及成就相关配置
+        /// <summary>
+        /// 数据库成就分页
+        /// </summary>
+        public const string Config_AttainmentPage = "cfg_AttainmentPage";
+        /// <summary>
+        /// 数据库成就相关配置
+        /// </summary>
+        public const string Config_AttainmentBase = "cfg_AttainmentBase";
+        #endregion
+        
+        
+        #region 科技树解锁界面相关配置
+        /// <summary>
+        /// 科技范围配置
+        /// </summary>
+        public const string Config_ScienceRange = "cfg_ScienceRange";
+        /// <summary>
+        /// 科技基础显示配置
+        /// </summary>
+        public const string Config_ScienceBase = "cfg_ScienceBase";
+        /// <summary>
+        /// 科技激活相关数据
+        /// </summary>
+        public const string Config_ScienceData = "cfg_ScienceData";
+        #endregion
+        
+        
         #region 配置特殊功能表
         /// <summary>
         /// 配置覆盖关系表

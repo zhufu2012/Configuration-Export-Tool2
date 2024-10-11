@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 CameraBase 用于 相机基本数据,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class CameraBase
     {
         #region 参数及初始化
@@ -96,6 +99,30 @@ namespace Remnant_Afterglow
 			BaseEdgeScrollSpeed = (float)dict["BaseEdgeScrollSpeed"];
 			CursorPoint = (Texture2D)dict["CursorPoint"];
 			CursorGrab = (Texture2D)dict["CursorGrab"];
+			InitData();
+        }
+
+        
+        public CameraBase(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_CameraBase, cfg_id);//public const string Config_CameraBase = "cfg_CameraBase"; 
+			CameraId = (int)dict["CameraId"];
+			AssemblyIdList = (List<List<int>>)dict["AssemblyIdList"];
+			StartPos = (Vector2)dict["StartPos"];
+			IsMove = (bool)dict["IsMove"];
+			MoveSpeed = (float)dict["MoveSpeed"];
+			StartZoom = (float)dict["StartZoom"];
+			IsZoomIn = (bool)dict["IsZoomIn"];
+			IsZoomOut = (bool)dict["IsZoomOut"];
+			MaxZoom = (float)dict["MaxZoom"];
+			MinZoom = (float)dict["MinZoom"];
+			ZoomIncrement = (float)dict["ZoomIncrement"];
+			IsEdgeScroll = (bool)dict["IsEdgeScroll"];
+			EdgeScrollMargin = (float)dict["EdgeScrollMargin"];
+			BaseEdgeScrollSpeed = (float)dict["BaseEdgeScrollSpeed"];
+			CursorPoint = (Texture2D)dict["CursorPoint"];
+			CursorGrab = (Texture2D)dict["CursorGrab"];
+			InitData();
         }
 
         public CameraBase(Dictionary<string, object> dict)
@@ -116,6 +143,7 @@ namespace Remnant_Afterglow
 			BaseEdgeScrollSpeed = (float)dict["BaseEdgeScrollSpeed"];
 			CursorPoint = (Texture2D)dict["CursorPoint"];
 			CursorGrab = (Texture2D)dict["CursorGrab"];
+			InitData();
         }
         #endregion
     }

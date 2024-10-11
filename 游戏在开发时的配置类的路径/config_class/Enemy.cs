@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 Enemy 用于 敌人基础配置测试,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class Enemy
     {
         #region 参数及初始化
@@ -58,6 +61,23 @@ namespace Remnant_Afterglow
 			Blood = (int)dict["Blood"];
 			Scale = (Vector2)dict["Scale"];
 			Speed = (int)dict["Speed"];
+			InitData();
+        }
+
+        
+        public Enemy(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_Enemy, cfg_id);//public const string Config_Enemy = "cfg_Enemy"; 
+			Enemy_Id = (int)dict["Enemy_Id"];
+			Enemy_Name = (language_id)dict["Enemy_Name"];
+			Enemy_Describe1 = (string)dict["Enemy_Describe1"];
+			Enemy_Describe2 = (string)dict["Enemy_Describe2"];
+			DrawFrame = (int)dict["DrawFrame"];
+			PhysicalFrame = (int)dict["PhysicalFrame"];
+			Blood = (int)dict["Blood"];
+			Scale = (Vector2)dict["Scale"];
+			Speed = (int)dict["Speed"];
+			InitData();
         }
 
         public Enemy(Dictionary<string, object> dict)
@@ -71,6 +91,7 @@ namespace Remnant_Afterglow
 			Blood = (int)dict["Blood"];
 			Scale = (Vector2)dict["Scale"];
 			Speed = (int)dict["Speed"];
+			InitData();
         }
         #endregion
     }

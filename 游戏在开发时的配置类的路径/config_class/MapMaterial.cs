@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 MapMaterial 用于 生成地图用材料,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class MapMaterial
     {
         #region 参数及初始化
@@ -42,6 +45,20 @@ namespace Remnant_Afterglow
 			ImageSetId = (int)dict["ImageSetId"];
 			ImageSetIndex = (int)dict["ImageSetIndex"];
 			Parame = (float)dict["Parame"];
+			InitData();
+        }
+
+        
+        public MapMaterial(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_MapMaterial, cfg_id);//public const string Config_MapMaterial = "cfg_MapMaterial"; 
+			MaterialId = (int)dict["MaterialId"];
+			MaterialName = (string)dict["MaterialName"];
+			Probability = (float)dict["Probability"];
+			ImageSetId = (int)dict["ImageSetId"];
+			ImageSetIndex = (int)dict["ImageSetIndex"];
+			Parame = (float)dict["Parame"];
+			InitData();
         }
 
         public MapMaterial(Dictionary<string, object> dict)
@@ -52,6 +69,7 @@ namespace Remnant_Afterglow
 			ImageSetId = (int)dict["ImageSetId"];
 			ImageSetIndex = (int)dict["ImageSetIndex"];
 			Parame = (float)dict["Parame"];
+			InitData();
         }
         #endregion
     }

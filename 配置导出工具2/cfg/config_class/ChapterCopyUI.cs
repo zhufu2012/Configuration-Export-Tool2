@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 ChapterCopyUI 用于 章节关卡UI数据,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class ChapterCopyUI
     {
         #region 参数及初始化
@@ -39,6 +42,20 @@ namespace Remnant_Afterglow
 			Pos = (Vector2)dict["Pos"];
 			Size = (Vector2)dict["Size"];
 			ShowImage = (Texture2D)dict["ShowImage"];
+			InitData();
+        }
+
+        
+        public ChapterCopyUI(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_ChapterCopyUI, cfg_id);//public const string Config_ChapterCopyUI = "cfg_ChapterCopyUI"; 
+			ChapterId = (int)dict["ChapterId"];
+			CopyId = (int)dict["CopyId"];
+			ShowName = (string)dict["ShowName"];
+			Pos = (Vector2)dict["Pos"];
+			Size = (Vector2)dict["Size"];
+			ShowImage = (Texture2D)dict["ShowImage"];
+			InitData();
         }
 
         public ChapterCopyUI(Dictionary<string, object> dict)
@@ -49,6 +66,7 @@ namespace Remnant_Afterglow
 			Pos = (Vector2)dict["Pos"];
 			Size = (Vector2)dict["Size"];
 			ShowImage = (Texture2D)dict["ShowImage"];
+			InitData();
         }
         #endregion
     }

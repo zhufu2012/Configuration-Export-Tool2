@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Godot;
 namespace Remnant_Afterglow
 {
+    /// <summary>
+    /// 自动生成的配置类 MapBrushPoint 用于 ,拓展请在expand_class文件下使用partial拓展
+    /// </summary>
     public partial class MapBrushPoint
     {
         #region 参数及初始化
@@ -69,6 +72,23 @@ namespace Remnant_Afterglow
 			Shape_Select = (int)dict["Shape_Select"];
 			Polygon = (List<Vector2>)dict["Polygon"];
 			Radius = (float)dict["Radius"];
+			InitData();
+        }
+
+        
+        public MapBrushPoint(string cfg_id)
+        {
+            Dictionary<string, object> dict = ConfigLoadSystem.GetCfgIndex(ConfigConstant.Config_MapBrushPoint, cfg_id);//public const string Config_MapBrushPoint = "cfg_MapBrushPoint"; 
+			Map_Brush_Id = (int)dict["Map_Brush_Id"];
+			Brush_Type_Name = (language_id)dict["Brush_Type_Name"];
+			Brush_Describe = (string)dict["Brush_Describe"];
+			FirstWaveTime = (float)dict["FirstWaveTime"];
+			BrushPos = (Vector2)dict["BrushPos"];
+			WaveList = (List<int>)dict["WaveList"];
+			Shape_Select = (int)dict["Shape_Select"];
+			Polygon = (List<Vector2>)dict["Polygon"];
+			Radius = (float)dict["Radius"];
+			InitData();
         }
 
         public MapBrushPoint(Dictionary<string, object> dict)
@@ -82,6 +102,7 @@ namespace Remnant_Afterglow
 			Shape_Select = (int)dict["Shape_Select"];
 			Polygon = (List<Vector2>)dict["Polygon"];
 			Radius = (float)dict["Radius"];
+			InitData();
         }
         #endregion
     }

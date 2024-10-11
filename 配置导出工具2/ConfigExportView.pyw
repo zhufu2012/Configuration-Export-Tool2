@@ -16,21 +16,21 @@ class FileBrowserApp:
 
         self.option_var1 = tk.IntVar(value=1)  # 是否将导出的配置压缩
         self.option_var2 = tk.IntVar(value=1)  # 双击打开配置还是打开代码
-
+        self.combobox = ""
         self.root = root
         self.root.title("配置导出工具")
         self.root.geometry("700x450")  # 设置窗口大小
         self.root.resizable(False, False)
-        ##self.create_menu()
+        self.create_menu()
         self.create_frames()
         self.bind_events()
 
     def create_menu(self):
         # 创建菜单栏
         menu_bar = tk.Menu(self.root)
-        file_menu = tk.Menu(menu_bar, tearoff=0)
-        file_menu.add_command(label="刷新所有表的数据类型", command=self.refresh_data_types)
-        menu_bar.add_cascade(label="文件操作", menu=file_menu)
+        #file_menu = tk.Menu(menu_bar, tearoff=0)
+        #file_menu.add_command(label="刷新所有表的数据类型", command=self.refresh_data_types)
+        #menu_bar.add_cascade(label="文件操作", menu=file_menu)
         self.root.config(menu=menu_bar)
 
     def refresh_data_types(self):
@@ -39,13 +39,13 @@ class FileBrowserApp:
 
     def create_frames(self):
         # 创建左右两个Frame
-        self.left_frame = tk.Frame(self.root, width=300, height=600, bg='lightgrey')
+        self.left_frame = tk.Frame(self.root, width=250, height=600, bg='lightgrey')
         self.left_frame.pack(side='left', fill='both', expand=True)
 
-        self.right_frame = tk.Frame(self.root, width=300, height=400, bg='lightblue')
+        self.right_frame = tk.Frame(self.root, width=350, height=300, bg='lightblue')
         self.right_frame.pack(side='top', fill='both', expand=True)
 
-        self.right_frame2 = tk.Frame(self.root, width=300, height=400, bg='lightblue')
+        self.right_frame2 = tk.Frame(self.root, width=350, height=300, bg='lightblue')
         self.right_frame2.pack(side='bottom', fill='both', expand=True)
 
         self.create_treeview()
@@ -60,7 +60,7 @@ class FileBrowserApp:
     def create_treeview(self):
         # 创建TreeView用于显示文件夹结构
         self.tree = ttk.Treeview(self.left_frame, show="tree", displaycolumns="#all", selectmode="browse")
-        self.tree.pack(padx=10, pady=10, fill='both', expand=True)
+        self.tree.pack(padx=8, pady=8, fill='both', expand=True)
         stu_root = self.tree.insert("", 'end', text="基础配置")
         self.insert_node(ConfigData["工具读取的xlsx文件夹路径"], stu_root)
 
@@ -83,8 +83,12 @@ class FileBrowserApp:
         self.err_label.pack(pady=5)
 
         # 创建一个 Frame 用于包裹按钮，然后将按钮放置在该 Frame 中
-        button_frame = tk.Frame(self.right_frame)
-        button_frame.pack(pady=5)
+        button_frame1 = tk.Frame(self.right_frame)
+        button_frame1.pack(pady=5)
+        
+            # 创建一个 Frame 用于包裹第二行的按钮
+        button_frame2 = tk.Frame(self.right_frame)
+        button_frame2.pack(pady=5)
 
         # 创建单选按钮
         radio_frame = tk.Frame(self.right_frame)
@@ -99,24 +103,36 @@ class FileBrowserApp:
         tk.Radiobutton(radio_frame, text="双击打开代码", variable=self.option_var2, value=2).pack(anchor=tk.W)
 
         # 创建按钮用于操作，并指定它们所在的 Frame 为 button_frame
-        self.export_all_btn = tk.Button(button_frame, text="导出配置", command=self.export_all)
+        self.export_all_btn = tk.Button(button_frame1, text="导出配置", command=self.export_all)
         self.export_all_btn.pack(side=tk.LEFT, padx=5)
-
-        self.copy_config_develop_btn = tk.Button(button_frame, text="复制开发路径", command=self.copy_config_develop)
+        
+        self.open_subtable_btn = tk.Button(button_frame1, text="打开表格", command=self.open_table)
+        self.open_subtable_btn.pack(side=tk.LEFT, padx=5)
+        
+        self.open_error_btn = tk.Button(button_frame1, text="打开报错", command=self.open_error_table)
+        self.open_error_btn.pack(side=tk.LEFT, padx=5)
+        
+        
+        self.combobox = ttk.Combobox(button_frame2)
+        self.combobox.pack(side=tk.LEFT, padx=2)
+        # 提取字典的所有键
+        keys = ConfigData["复制配置数据列表"].keys()
+        # 将键转换为元组
+        keys_tuple = tuple(keys)
+        self.combobox['value'] = keys_tuple
+        self.combobox['state'] = "readonly"
+        self.combobox.current(0)
+        
+        
+        self.copy_config_develop_btn = tk.Button(button_frame2, text="复制到对应路径", command=self.copy_config_develop)
         self.copy_config_develop_btn.pack(side=tk.LEFT, padx=5)
 
-        self.copy_config_test_btn = tk.Button(button_frame, text="复制到测试路径", command=self.copy_config_test)
-        self.copy_config_test_btn.pack(side=tk.LEFT, padx=5)
-
-        self.open_subtable_btn = tk.Button(button_frame, text="打开表格", command=self.open_table)
-        self.open_subtable_btn.pack(side=tk.LEFT, padx=5)
-
-        self.open_error_btn = tk.Button(button_frame, text="打开报错", command=self.open_error_table)
-        self.open_error_btn.pack(side=tk.LEFT, padx=5)
-
-        self.export_class = tk.Button(button_frame, text="导出类", command=self.export_class)
+        # self.copy_config_test_btn = tk.Button(button_frame, text="复制到测试路径", command=self.copy_config_test)
+        # self.copy_config_test_btn.pack(side=tk.LEFT, padx=5)
+        
+        self.export_class = tk.Button(button_frame2, text="导出类", command=self.export_class)
         self.export_class.pack(side=tk.LEFT, padx=5)
-
+        
         self.button_state("disabled")
 
     def button_state(self, states):
@@ -250,12 +266,9 @@ class FileBrowserApp:
             self.error_table_path = ""
 
     def copy_config_develop(self):
-        Config.copy_config_develop()
-        self.err_label.config(text="复制配置到开发项目成功！")
-
-    def copy_config_test(self):
-        Config.copy_config_test()
-        self.err_label.config(text="复制配置到测试项目成功！")
+        target_path = self.combobox.get()
+        Config.copy_config_develop(target_path)
+        self.err_label.config(text="复制配置到"+ target_path +"成功！")
 
     def open_table(self):
         open_view.openexcel(os.path.abspath(self.select_path))
